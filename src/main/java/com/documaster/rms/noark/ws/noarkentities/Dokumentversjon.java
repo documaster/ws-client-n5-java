@@ -26,6 +26,9 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	@JsonIgnore
 	public Long filstoerrelse;
 
+	@JsonIgnore
+	private String filnavn;
+
 	public Integer versjonsnummer;
 	public String format;
 	public String formatDetaljer;
@@ -49,7 +52,8 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 			@JsonProperty("referanseDokumentfil") String referanseDokumentfil,
 			@JsonProperty("sjekksum") String sjekksum,
 			@JsonProperty("sjekksumAlgoritme") String sjekksumAlgoritme,
-			@JsonProperty("filstoerrelse") long filstoerrelse) {
+			@JsonProperty("filstoerrelse") long filstoerrelse,
+			@JsonProperty("filnavn") String filnavn) {
 
 		super(id, uuid, version);
 
@@ -57,6 +61,7 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 		this.sjekksum = sjekksum;
 		this.sjekksumAlgoritme = sjekksumAlgoritme;
 		this.filstoerrelse = filstoerrelse;
+		this.filnavn = filnavn;
 	}
 
 	public Dokumentfil getDokumentfil() {
@@ -87,6 +92,11 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	public Long getFilstoerrelse() {
 
 		return filstoerrelse;
+	}
+
+	public String getFilnavn() {
+
+		return filnavn;
 	}
 
 	public Variantformat getVariantformat() {
