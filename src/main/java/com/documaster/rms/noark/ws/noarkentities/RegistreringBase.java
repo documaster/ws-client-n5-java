@@ -28,6 +28,7 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public static final String KORRESPONDANSEPART_LINK = "refKorrespondansepart";
 	public static final String DOKUMENT_LINK = "refDokument";
 	public static final String NOEKKELORD_LINK = "refNoekkelord";
+	public static final String MERKNAD_LINK = "refMerknad";
 
 	private String registreringsIdent;
 	private String tittel;
@@ -285,6 +286,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public LinkAction<TEntity> linkNoekkelord(Noekkelord... noekkelord) {
 
 		return link(NOEKKELORD_LINK, noekkelord);
+	}
+
+	public LinkAction<TEntity> linkMerknad(String... merknadIds) {
+
+		return link(MERKNAD_LINK, merknadIds);
+	}
+
+	public LinkAction<TEntity> linkMerknad(Merknad... merknad) {
+
+		return link(MERKNAD_LINK, merknad);
 	}
 
 	public LinkAction<TEntity> linkMappe(String mappeId) {
