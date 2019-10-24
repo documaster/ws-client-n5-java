@@ -10,6 +10,7 @@ import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.SaveAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.client.handlers.BeanResponseHandler;
+import com.documaster.rms.noark.ws.client.handlers.ErrorResponseHandler;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntity;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntityBase;
 
@@ -49,8 +50,11 @@ public class Transaction extends HttpService<RmsClient> {
 
 	public TransactionResponse commit() {
 
+		ErrorResponseHandler errorHandler =
+				new ErrorResponseHandler(getClient().getMapper(), getClient().getErrorResponseType());
+
 		return call(getClient().getServerAddress(), NoarkClient.TRANSACTION_ACTION_PATH, HttpMethod.POST, this.req,
-				new BeanResponseHandler<>(getClient().getMapper(), TransactionResponse.class)).getBean();
+				new BeanResponseHandler<>(getClient().getMapper(), TransactionResponse.class, errorHandler)).getBean();
 	}
 
 	public <TEntity extends NoarkEntity> Transaction delete(TEntity noarkEntity) {

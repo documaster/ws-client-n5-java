@@ -4,25 +4,27 @@ import java.io.IOException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.entity.ContentType;
 import org.apache.http.util.EntityUtils;
 
-public class StringResponseHandler implements ResponseHandler<StringResponse> {
+public class StringResponseHandler extends BaseResponseHandler<StringResponse> {
 
 	private final String encoding;
-	private final ErrorResponseHandler errorHandler;
 
 	public StringResponseHandler(String encoding) {
 
+		this(encoding, new ErrorResponseHandler());
+	}
+
+	public StringResponseHandler(String encoding, ErrorResponseHandler errorHandler) {
+
+		super(errorHandler);
+
 		this.encoding = encoding;
-		this.errorHandler = new ErrorResponseHandler();
 	}
 
 	@Override
-	public StringResponse handleResponse(final HttpResponse response) throws IOException {
-
-		errorHandler.throwOnErrorResponse(response);
+	protected StringResponse handleResponseInternal(final HttpResponse response) throws IOException {
 
 		final HttpEntity entity = response.getEntity();
 
