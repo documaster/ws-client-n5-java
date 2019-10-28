@@ -20,6 +20,7 @@ import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
 import com.documaster.rms.noark.ws.constants.Korrespondanseparttype;
 import com.documaster.rms.noark.ws.constants.Mappetype;
+import com.documaster.rms.noark.ws.constants.Merknadstype;
 import com.documaster.rms.noark.ws.constants.Moeteregistreringsstatus;
 import com.documaster.rms.noark.ws.constants.Moeteregistreringstype;
 import com.documaster.rms.noark.ws.constants.Moetesakstype;
@@ -39,6 +40,7 @@ import com.documaster.rms.noark.ws.noarkentities.Klasse;
 import com.documaster.rms.noark.ws.noarkentities.Klassifikasjonssystem;
 import com.documaster.rms.noark.ws.noarkentities.Korrespondansepart;
 import com.documaster.rms.noark.ws.noarkentities.Mappe;
+import com.documaster.rms.noark.ws.noarkentities.Merknad;
 import com.documaster.rms.noark.ws.noarkentities.Moetedeltaker;
 import com.documaster.rms.noark.ws.noarkentities.Moetemappe;
 import com.documaster.rms.noark.ws.noarkentities.Moeteregistrering;
@@ -84,6 +86,7 @@ public enum NoarkObjectMappings {
 		putTypeMapping(typeMappings, Moetemappe.class);
 		putTypeMapping(typeMappings, Moetedeltaker.class);
 		putTypeMapping(typeMappings, Moeteregistrering.class);
+		putTypeMapping(typeMappings, Merknad.class);
 
 		return Collections.unmodifiableMap(typeMappings);
 	}
@@ -116,6 +119,7 @@ public enum NoarkObjectMappings {
 		putCodeValueMapping(codeValueMappings, Moeteregistreringstype.class);
 		putCodeValueMapping(codeValueMappings, Moeteregistreringsstatus.class);
 		putCodeValueMapping(codeValueMappings, Moetesakstype.class);
+		putCodeValueMapping(codeValueMappings, Merknadstype.class);
 
 		return Collections.unmodifiableMap(codeValueMappings);
 	}

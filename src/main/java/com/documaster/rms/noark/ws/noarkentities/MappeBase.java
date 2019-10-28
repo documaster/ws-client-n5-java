@@ -23,6 +23,7 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Fina
 	public static final String EKSTERN_ID_LINK = "refEksternId";
 	public static final String REGISTRERING_LINK = "refRegistrering";
 	public static final String NOEKKELORD_LINK = "refNoekkelord";
+	public static final String MERKNAD_LINK = "refMerknad";
 
 	private String mappeIdent;
 	private String tittel;
@@ -213,6 +214,16 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Fina
 	public LinkAction<TEntity> linkNoekkelord(Noekkelord... noekkelord) {
 
 		return link(NOEKKELORD_LINK, noekkelord);
+	}
+
+	public LinkAction<TEntity> linkMerknad(String... merknadIds) {
+
+		return link(MERKNAD_LINK, merknadIds);
+	}
+
+	public LinkAction<TEntity> linkMerknad(Merknad... merknad) {
+
+		return link(MERKNAD_LINK, merknad);
 	}
 
 	@JsonIgnore
