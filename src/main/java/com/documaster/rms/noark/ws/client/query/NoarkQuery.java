@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.client.query;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -77,8 +78,10 @@ public class NoarkQuery<TEntity extends NoarkEntity> implements Bean {
 			return null;
 		}
 
-		return parameters.stream().collect(Collectors
-				.toMap(parameter -> parameter.getParamName(), parameter -> parameter.getParamValue()));
+		Map<String, Object> parametersDict = new LinkedHashMap<>();
+		parameters.stream().forEach(p -> parametersDict.put(p.getParamName(), p.getParamValue()));
+
+		return parametersDict;
 	}
 
 	public boolean getPublicUse() {
