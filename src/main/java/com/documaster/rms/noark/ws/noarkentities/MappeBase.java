@@ -24,6 +24,10 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Fina
 	public static final String REGISTRERING_LINK = "refRegistrering";
 	public static final String NOEKKELORD_LINK = "refNoekkelord";
 	public static final String MERKNAD_LINK = "refMerknad";
+	public static final String KRYSSREFERANSE_TIL_MAPPE_LINK = "refKryssreferanseTilMappe";
+	public static final String KRYSSREFERANSE_FRA_MAPPE_LINK = "refKryssreferanseFraMappe";
+	public static final String KRYSSREFERANSE_TIL_REGISTRERING_LINK = "refKryssreferanseTilRegistrering";
+	public static final String KRYSSREFERANSE_FRA_REGISTRERING_LINK = "refKryssreferanseFraRegistrering";
 
 	private String mappeIdent;
 	private String tittel;
@@ -224,6 +228,46 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Fina
 	public LinkAction<TEntity> linkMerknad(Merknad... merknad) {
 
 		return link(MERKNAD_LINK, merknad);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseTilMappe(String... mappeIds) {
+
+		return link(KRYSSREFERANSE_TIL_MAPPE_LINK, mappeIds);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseTilMappe(AbstraktMappe... mappe) {
+
+		return link(KRYSSREFERANSE_TIL_MAPPE_LINK, mappe);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseFraMappe(String... mappeIds) {
+
+		return link(KRYSSREFERANSE_FRA_MAPPE_LINK, mappeIds);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseFraMappe(AbstraktMappe... mappe) {
+
+		return link(KRYSSREFERANSE_FRA_MAPPE_LINK, mappe);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseTilRegistrering(String... registreringIds) {
+
+		return link(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registreringIds);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseTilRegistrering(AbstraktRegistrering... registrering) {
+
+		return link(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registrering);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseFraRegistrering(String... registreringIds) {
+
+		return link(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registreringIds);
+	}
+
+	public LinkAction<TEntity> addKryssreferanseFraRegistrering(AbstraktRegistrering... registrering) {
+
+		return link(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registrering);
 	}
 
 	@JsonIgnore
