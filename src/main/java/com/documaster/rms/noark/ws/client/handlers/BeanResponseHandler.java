@@ -8,27 +8,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.entity.ContentType;
 
-public class BeanResponseHandler<T extends Bean> implements ResponseHandler<BeanResponse<T>> {
+public class BeanResponseHandler<T extends Bean> extends BaseResponseHandler<BeanResponse<T>> {
 
 	private final ObjectMapper mapper;
 	private final Class<? extends Bean> beanClass;
-	private final ErrorResponseHandler errorHandler;
 
 	public BeanResponseHandler(ObjectMapper mapper, Class<T> beanClass) {
 
+		this(mapper, beanClass, new ErrorResponseHandler());
+	}
+
+	public BeanResponseHandler(ObjectMapper mapper, Class<T> beanClass, ErrorResponseHandler errorHandler) {
+
+		super(errorHandler);
+
 		this.mapper = mapper;
 		this.beanClass = beanClass;
-		this.errorHandler = new ErrorResponseHandler();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public BeanResponse<T> handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-
-		errorHandler.throwOnErrorResponse(response);
+	protected BeanResponse<T> handleResponseInternal(HttpResponse response) throws ClientProtocolException, IOException {
 
 		final HttpEntity entity = response.getEntity();
 

@@ -14,6 +14,8 @@ public class HttpClient {
 	private String authToken;
 	private boolean ignoreCertificateErrors;
 
+	private ErrorResponseType errorResponseType;
+
 	public HttpClient(String serverAddress) {
 
 		this.serverAddress = !serverAddress.endsWith("/") && !serverAddress.endsWith("\\")
@@ -102,6 +104,33 @@ public class HttpClient {
 
 		setTruststorePath(truststorePath);
 		setTruststorePassword(truststorePass);
+	}
+
+	public ErrorResponseType getErrorResponseType() {
+
+		return errorResponseType;
+	}
+
+	public void setErrorResponseType(ErrorResponseType errorResponseType) {
+
+		this.errorResponseType = errorResponseType;
+	}
+
+	public static enum ErrorResponseType {
+
+		APPLICATION_JSON("application/json");
+
+		private final String value;
+
+		private ErrorResponseType(String value) {
+
+			this.value = value;
+		}
+
+		public String getValue() {
+
+			return value;
+		}
 	}
 }
 

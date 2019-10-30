@@ -27,6 +27,8 @@ public abstract class HttpService<TC extends HttpClient> {
 	private static final String HEADER_AUTHORIZATION = "Authorization";
 	private static final String AUTHORIZATION_PREFIX = "Bearer ";
 
+	private static final String HEADER_ERROR_RESPONSE_TYPE = "X-Documaster-Error-Response-Type";
+
 	private final TC client;
 	private final CloseableHttpClient sslClient;
 
@@ -139,6 +141,7 @@ public abstract class HttpService<TC extends HttpClient> {
 		Request request = method.getRequest(address + action);
 
 		setAuthorizationHeader(request);
+		setErrorResponseTypeHeader(request);
 
 		return request;
 	}
@@ -148,6 +151,14 @@ public abstract class HttpService<TC extends HttpClient> {
 		if (this.client.getAuthToken() != null) {
 
 			request.addHeader(HEADER_AUTHORIZATION, AUTHORIZATION_PREFIX + this.client.getAuthToken());
+		}
+	}
+
+	private void setErrorResponseTypeHeader(Request request) {
+
+		if (getClient().getErrorResponseType() != null) {
+
+			request.addHeader(HEADER_ERROR_RESPONSE_TYPE, getClient().getErrorResponseType().getValue());
 		}
 	}
 }

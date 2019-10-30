@@ -7,24 +7,26 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.entity.ContentType;
 
-public class OutputStreamResponseHandler implements ResponseHandler<OutputStreamResponse> {
+public class OutputStreamResponseHandler extends BaseResponseHandler<OutputStreamResponse> {
 
 	private final OutputStream os;
-	private final ErrorResponseHandler errorHandler;
 
 	public OutputStreamResponseHandler(OutputStream os) {
 
+		this(os, new ErrorResponseHandler());
+	}
+
+	public OutputStreamResponseHandler(OutputStream os, ErrorResponseHandler errorHandler) {
+
+		super(errorHandler);
 		this.os = os;
-		this.errorHandler = new ErrorResponseHandler();
 	}
 
 	@Override
-	public OutputStreamResponse handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-
-		errorHandler.throwOnErrorResponse(response);
+	protected OutputStreamResponse handleResponseInternal(HttpResponse response)
+			throws ClientProtocolException, IOException {
 
 		final HttpEntity entity = response.getEntity();
 

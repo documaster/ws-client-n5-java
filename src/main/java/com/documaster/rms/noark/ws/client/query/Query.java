@@ -9,6 +9,7 @@ import com.documaster.rms.noark.ws.client.HttpService;
 import com.documaster.rms.noark.ws.client.NoarkClient;
 import com.documaster.rms.noark.ws.client.RmsClient;
 import com.documaster.rms.noark.ws.client.handlers.BeanResponseHandler;
+import com.documaster.rms.noark.ws.client.handlers.ErrorResponseHandler;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntity;
 
 public class Query<TEntity extends NoarkEntity> extends HttpService<RmsClient> {
@@ -105,7 +106,10 @@ public class Query<TEntity extends NoarkEntity> extends HttpService<RmsClient> {
 
 	public QueryResponse<TEntity> execute() {
 
+		ErrorResponseHandler errorHandler =
+				new ErrorResponseHandler(getClient().getMapper(), getClient().getErrorResponseType());
+
 		return call(getClient().getServerAddress(), NoarkClient.QUERY_PATH, HttpMethod.POST, this.query,
-				new BeanResponseHandler<>(getClient().getMapper(), QueryResponse.class)).getBean();
+				new BeanResponseHandler<>(getClient().getMapper(), QueryResponse.class, errorHandler)).getBean();
 	}
 }
