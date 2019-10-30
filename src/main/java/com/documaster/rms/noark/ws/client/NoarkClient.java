@@ -22,6 +22,7 @@ import com.documaster.rms.noark.ws.client.codelist.CodeListResponse;
 import com.documaster.rms.noark.ws.client.codelist.CodeValue;
 import com.documaster.rms.noark.ws.client.exceptions.ServiceException;
 import com.documaster.rms.noark.ws.client.handlers.BeanResponseHandler;
+import com.documaster.rms.noark.ws.client.handlers.ErrorResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.OutputStreamResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.VoidResponseHandler;
 import com.documaster.rms.noark.ws.client.query.Query;
@@ -109,7 +110,7 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 		Argument.notNullOrEmpty("fileName", fileName);
 
 		return call(getClient().getServerAddress(), UPLOAD_PATH, HttpMethod.POST, inputStream, fileName,
-				new BeanResponseHandler<>(getClient().getMapper(), Dokumentfil.class)).getBean();
+				new BeanResponseHandler<>(getClient().getMapper(), Dokumentfil.class, getErrorHandler())).getBean();
 	}
 
 	@Override
@@ -134,7 +135,8 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 		String actionPath = DOWNLOAD_PATH + "?id=" + dokumentfil.getId();
 
-		call(getClient().getServerAddress(), actionPath, HttpMethod.GET, new OutputStreamResponseHandler(outputStream));
+		call(getClient().getServerAddress(), actionPath, HttpMethod.GET,
+				new OutputStreamResponseHandler(outputStream, getErrorHandler()));
 	}
 
 	@Override
@@ -184,7 +186,8 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 		}
 
 		return call(getClient().getServerAddress(), actionPathBuilder.toString(), HttpMethod.GET,
-				new BeanResponseHandler<>(getClient().getMapper(), CodeListResponse.class)).getBean().getResults();
+				new BeanResponseHandler<>(getClient().getMapper(), CodeListResponse.class, getErrorHandler())).getBean()
+				.getResults();
 	}
 
 	@Override
@@ -199,7 +202,8 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 		@SuppressWarnings("unchecked")
 		T bean = (T) call(getClient().getServerAddress(), actionPath, HttpMethod.PUT, codeListValue,
-				new BeanResponseHandler<>(getClient().getMapper(), codeListValue.getClass())).getBean();
+				new BeanResponseHandler<>(getClient().getMapper(), codeListValue.getClass(), getErrorHandler()))
+				.getBean();
 
 		return bean;
 	}
@@ -214,7 +218,8 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 				.replace("{listId}", urlEncode(listId))
 				.replace("{code}", urlEncode(code));
 
-		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE, new VoidResponseHandler());
+		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE,
+				new VoidResponseHandler(getErrorHandler()));
 	}
 
 	@Override
@@ -268,7 +273,8 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 		}
 
 		return call(getClient().getServerAddress(), actionPathBuilder.toString(), HttpMethod.GET,
-				new BeanResponseHandler<>(getClient().getMapper(), BusinessSpecificMetadataInfo.class)).getBean();
+				new BeanResponseHandler<>(
+						getClient().getMapper(), BusinessSpecificMetadataInfo.class, getErrorHandler())).getBean();
 	}
 
 	@Override
@@ -281,7 +287,7 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 				.replace("{groupId}", urlEncode(bsmGroup.getGroupId()));
 
 		return call(getClient().getServerAddress(), actionPath, HttpMethod.PUT, bsmGroup,
-				new BeanResponseHandler<>(getClient().getMapper(), BsmGroup.class)).getBean();
+				new BeanResponseHandler<>(getClient().getMapper(), BsmGroup.class, getErrorHandler())).getBean();
 	}
 
 	@Override
@@ -291,7 +297,8 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 		String actionPath = BSM_REGISTRY_DELETE_GROUP_PATH.replace("{groupId}", urlEncode(groupId));
 
-		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE, new VoidResponseHandler());
+		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE,
+				new VoidResponseHandler(getErrorHandler()));
 	}
 
 	@Override
@@ -306,7 +313,7 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 				.replace("{fieldId}", urlEncode(bsmField.getFieldId()));
 
 		return call(getClient().getServerAddress(), actionPath, HttpMethod.PUT, bsmField,
-				new BeanResponseHandler<>(getClient().getMapper(), BsmField.class)).getBean();
+				new BeanResponseHandler<>(getClient().getMapper(), BsmField.class, getErrorHandler())).getBean();
 	}
 
 	@Override
@@ -319,7 +326,12 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 				.replace("{groupId}", urlEncode(groupId))
 				.replace("{fieldId}", urlEncode(fieldId));
 
-		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE, new VoidResponseHandler());
+		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE, new VoidResponseHandler(getErrorHandler()));
+	}
+
+	private ErrorResponseHandler getErrorHandler() {
+
+		return new ErrorResponseHandler(getClient().getMapper(), getClient().getErrorResponseType());
 	}
 
 	private String urlEncode(String parameter, String value) {

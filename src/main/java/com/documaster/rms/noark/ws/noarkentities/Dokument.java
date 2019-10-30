@@ -20,6 +20,7 @@ public class Dokument extends NoarkEntityBase<Dokument> {
 	public static final String REGISTRERING_LINK = "refRegistrering";
 	public static final String EKSTERN_ID_LINK = "refEksternId";
 	public static final String DOKUMENTVERSJON_LINK = "refDokumentversjon";
+	public static final String MERKNAD_LINK = "refMerknad";
 
 	private String tittel;
 	private String beskrivelse;
@@ -156,6 +157,16 @@ public class Dokument extends NoarkEntityBase<Dokument> {
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+	}
+
+	public LinkAction<Dokument> linkMerknad(String... merknadIds) {
+
+		return link(MERKNAD_LINK, merknadIds);
+	}
+
+	public LinkAction<Dokument> linkMerknad(Merknad... merknad) {
+
+		return link(MERKNAD_LINK, merknad);
 	}
 
 	public LinkAction<Dokument> linkRegistrering(String registreringId) {
