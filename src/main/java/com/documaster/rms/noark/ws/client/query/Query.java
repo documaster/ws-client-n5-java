@@ -86,6 +86,18 @@ public class Query<TEntity extends NoarkEntity> extends HttpService<RmsClient> {
 		return this;
 	}
 
+	public Query<TEntity> addJoin(String alias, String reference) {
+
+		this.query.getJoins().add(new Join(alias, reference));
+		return this;
+	}
+
+	public Query<TEntity> addJoins(Join... joins) {
+
+		Collections.addAll(this.query.getJoins(), joins);
+		return this;
+	}
+
 	public Query<TEntity> addSortOrder(String field) {
 
 		addSortOrder(field, Order.ASCENDING);
