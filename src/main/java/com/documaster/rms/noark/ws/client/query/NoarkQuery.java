@@ -23,6 +23,9 @@ public class NoarkQuery<TEntity extends NoarkEntity> implements Bean {
 	@JsonIgnore
 	private final List<QueryParam> parameters = new ArrayList<>();
 
+	@JsonIgnore
+	private final List<Join> joins = new ArrayList<>();
+
 	public NoarkQuery(Class<TEntity> entityClass, int limit) {
 
 		this(entityClass, null, limit);
@@ -82,6 +85,25 @@ public class NoarkQuery<TEntity extends NoarkEntity> implements Bean {
 		parameters.stream().forEach(p -> parametersDict.put(p.getParamName(), p.getParamValue()));
 
 		return parametersDict;
+	}
+
+	public List<Join> getJoins() {
+
+		return joins;
+	}
+
+	@JsonProperty("joins")
+	public Map<String, String> getJoinsDict() {
+
+		if (joins == null) {
+
+			return null;
+		}
+
+		Map<String, String> joinsDict = new LinkedHashMap<>();
+		joins.stream().forEach(join -> joinsDict.put(join.getAlias(), join.getReference()));
+
+		return joinsDict;
 	}
 
 	public boolean getPublicUse() {
