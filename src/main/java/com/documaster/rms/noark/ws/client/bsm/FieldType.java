@@ -12,4 +12,7 @@ public enum FieldType {
 
 	@JsonProperty("double")
 	DOUBLE,
+
+	@JsonProperty("encrypted")
+	ENCRYPTED,
 }
