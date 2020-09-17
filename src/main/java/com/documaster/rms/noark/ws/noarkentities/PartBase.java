@@ -13,6 +13,7 @@ public abstract class PartBase<TEntity extends PartBase<TEntity>> extends NoarkE
 	private String telefonnummer;
 	private String kontaktperson;
 	private String foedselsnummer;
+	private String organisasjonsnummer;
 	private String dnummer;
 
 	protected PartBase() {
@@ -106,6 +107,16 @@ public abstract class PartBase<TEntity extends PartBase<TEntity>> extends NoarkE
 	public void setFoedselsnummer(String foedselsnummer) {
 
 		this.foedselsnummer = foedselsnummer;
+	}
+
+	public String getOrganisasjonsnummer() {
+
+		return organisasjonsnummer;
+	}
+
+	public void setOrganisasjonsnummer(String organisasjonsnummer) {
+
+		this.organisasjonsnummer = organisasjonsnummer;
 	}
 
 	public String getDnummer() {
