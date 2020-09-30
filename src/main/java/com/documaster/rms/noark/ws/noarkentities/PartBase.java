@@ -1,5 +1,6 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,7 +14,10 @@ public abstract class PartBase<TEntity extends PartBase<TEntity>> extends NoarkE
 	private String telefonnummer;
 	private String kontaktperson;
 	private String foedselsnummer;
+	private String organisasjonsnummer;
 	private String dnummer;
+
+	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	protected PartBase() {
 
@@ -108,6 +112,16 @@ public abstract class PartBase<TEntity extends PartBase<TEntity>> extends NoarkE
 		this.foedselsnummer = foedselsnummer;
 	}
 
+	public String getOrganisasjonsnummer() {
+
+		return organisasjonsnummer;
+	}
+
+	public void setOrganisasjonsnummer(String organisasjonsnummer) {
+
+		this.organisasjonsnummer = organisasjonsnummer;
+	}
+
 	public String getDnummer() {
 
 		return dnummer;
@@ -116,5 +130,16 @@ public abstract class PartBase<TEntity extends PartBase<TEntity>> extends NoarkE
 	public void setDnummer(String dnummer) {
 
 		this.dnummer = dnummer;
+	}
+
+	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
+
+		return virksomhetsspesifikkeMetadata;
+	}
+
+	public void setVirksomhetsspesifikkeMetadata(
+			BsmGroupsMap virksomhetsspesifikkeMetadata) {
+
+		this.virksomhetsspesifikkeMetadata = virksomhetsspesifikkeMetadata;
 	}
 }

@@ -32,6 +32,7 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	public Integer versjonsnummer;
 	public String format;
 	public String formatDetaljer;
+	public Boolean kryptertDokument;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -137,6 +138,16 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	public void setFormatDetaljer(String formatDetaljer) {
 
 		this.formatDetaljer = formatDetaljer;
+	}
+
+	public Boolean getKryptertDokument() {
+
+		return kryptertDokument;
+	}
+
+	public void setKryptertDokument(Boolean kryptertDokument) {
+
+		this.kryptertDokument = kryptertDokument;
 	}
 
 	public LinkAction<Dokumentversjon> linkDokument(String dokumentId) {
