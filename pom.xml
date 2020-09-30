@@ -4,7 +4,7 @@
 
 	<groupId>com.documaster.rms</groupId>
 	<artifactId>documaster-ws-client-n5</artifactId>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.4.0-SNAPSHOT</version>
 
 	<name>Documaster Noark 5 web services client</name>
 	<description>Documaster Noark 5 web services client</description>
