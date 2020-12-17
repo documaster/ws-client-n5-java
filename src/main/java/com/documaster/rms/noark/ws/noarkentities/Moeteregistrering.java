@@ -15,6 +15,8 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 
 	private String saksbehandler;
 
+	private String saksnummer;
+
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private AdministrativEnhet administrativEnhet;
@@ -58,6 +60,16 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 	public void setSaksbehandler(String saksbehandler) {
 
 		this.saksbehandler = saksbehandler;
+	}
+
+	public String getSaksnummer() {
+
+		return saksnummer;
+	}
+
+	public void setSaksnummer(String saksnummer) {
+
+		this.saksnummer = saksnummer;
 	}
 
 	public AdministrativEnhet getAdministrativEnhet() {
