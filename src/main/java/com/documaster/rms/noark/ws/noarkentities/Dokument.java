@@ -7,6 +7,7 @@ import com.documaster.rms.noark.ws.constants.Dokumentstatus;
 import com.documaster.rms.noark.ws.constants.Dokumenttype;
 import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.constants.TilknyttetRegistreringSom;
+import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -26,6 +27,7 @@ public class Dokument extends NoarkEntityBase<Dokument> {
 	private String beskrivelse;
 	private String forfatter;
 	private Integer dokumentnummer;
+	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -127,6 +129,16 @@ public class Dokument extends NoarkEntityBase<Dokument> {
 	public void setDokumentnummer(Integer dokumentnummer) {
 
 		this.dokumentnummer = dokumentnummer;
+	}
+
+	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
+
+		return virksomhetsspesifikkeMetadata;
+	}
+
+	public void setVirksomhetsspesifikkeMetadata(BsmGroupsMap virksomhetsspesifikkeMetadata) {
+
+		this.virksomhetsspesifikkeMetadata = virksomhetsspesifikkeMetadata;
 	}
 
 	public Dokumenttype getDokumenttype() {
