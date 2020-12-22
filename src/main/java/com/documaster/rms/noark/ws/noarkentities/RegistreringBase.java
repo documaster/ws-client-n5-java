@@ -29,6 +29,7 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public static final String DOKUMENT_LINK = "refDokument";
 	public static final String NOEKKELORD_LINK = "refNoekkelord";
 	public static final String MERKNAD_LINK = "refMerknad";
+	public static final String NASJONAL_IDENTIFIKATOR_LINK = "refNasjonalIdentifikator";
 	public static final String KRYSSREFERANSE_TIL_MAPPE_LINK = "refKryssreferanseTilMappe";
 	public static final String KRYSSREFERANSE_FRA_MAPPE_LINK = "refKryssreferanseFraMappe";
 	public static final String KRYSSREFERANSE_TIL_REGISTRERING_LINK = "refKryssreferanseTilRegistrering";
@@ -300,6 +301,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public LinkAction<TEntity> linkMerknad(Merknad... merknad) {
 
 		return link(MERKNAD_LINK, merknad);
+	}
+
+	public LinkAction<TEntity> linkNasjonalIdentifikator(String... nasjonalIdentifikatorIds) {
+
+		return link(NASJONAL_IDENTIFIKATOR_LINK, nasjonalIdentifikatorIds);
+	}
+
+	public LinkAction<TEntity> linkNasjonalIdentifikator(NasjonalIdentifikator<?>... nasjonalIdentifikator) {
+
+		return link(NASJONAL_IDENTIFIKATOR_LINK, nasjonalIdentifikator);
 	}
 
 	public LinkAction<TEntity> linkMappe(String mappeId) {
