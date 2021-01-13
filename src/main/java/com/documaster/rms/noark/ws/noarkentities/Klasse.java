@@ -3,6 +3,7 @@ package com.documaster.rms.noark.ws.noarkentities;
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Skjerming;
+import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,6 +25,7 @@ public class Klasse extends FinalizedEntityBase<Klasse> {
 	private String klasseIdent;
 	private String tittel;
 	private String beskrivelse;
+	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -72,6 +74,16 @@ public class Klasse extends FinalizedEntityBase<Klasse> {
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+	}
+
+	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
+
+		return virksomhetsspesifikkeMetadata;
+	}
+
+	public void setVirksomhetsspesifikkeMetadata(BsmGroupsMap virksomhetsspesifikkeMetadata) {
+
+		this.virksomhetsspesifikkeMetadata = virksomhetsspesifikkeMetadata;
 	}
 
 	public Skjerming getSkjerming() {

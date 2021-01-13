@@ -22,7 +22,8 @@ public enum CustomObjectMapper {
 		mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
 		mapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.ANY);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		mapper.setDefaultPropertyInclusion(
+				JsonInclude.Value.construct(JsonInclude.Include.NON_NULL, JsonInclude.Include.ALWAYS));
 		mapper.setDateFormat(new SimpleDateFormat(CustomDateFormat.TIMESTAMP));
 
 		this.mapper = mapper;
