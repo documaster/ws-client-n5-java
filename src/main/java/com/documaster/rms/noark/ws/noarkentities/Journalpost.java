@@ -22,6 +22,7 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	private String journalansvarligBrukerIdent;
 	private Date mottattDato;
 	private Date sendtDato;
+	private Boolean skjermKorrespondanseParterEInnsyn;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date offentlighetsvurdertDato;
@@ -139,6 +140,16 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public void setSendtDato(Date sendtDato) {
 
 		this.sendtDato = sendtDato;
+	}
+
+	public Boolean getSkjermKorrespondanseParterEInnsyn() {
+
+		return skjermKorrespondanseParterEInnsyn;
+	}
+
+	public void setSkjermKorrespondanseParterEInnsyn(Boolean skjermKorrespondanseParterEInnsyn) {
+
+		this.skjermKorrespondanseParterEInnsyn = skjermKorrespondanseParterEInnsyn;
 	}
 
 	public Date getOffentlighetsvurdertDato() {
