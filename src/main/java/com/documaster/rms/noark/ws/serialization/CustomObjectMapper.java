@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.serialization;
 
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,6 +26,7 @@ public enum CustomObjectMapper {
 		mapper.setDefaultPropertyInclusion(
 				JsonInclude.Value.construct(JsonInclude.Include.NON_NULL, JsonInclude.Include.ALWAYS));
 		mapper.setDateFormat(new SimpleDateFormat(CustomDateFormat.TIMESTAMP));
+		mapper.setTimeZone(TimeZone.getDefault());
 
 		this.mapper = mapper;
 	}
