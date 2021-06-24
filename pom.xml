@@ -38,7 +38,7 @@
 		<version.httpcomponents.fluent.hc>4.5.13</version.httpcomponents.fluent.hc>
 		<version.httpcomponents.httpclient>4.5.13</version.httpcomponents.httpclient>
 		<version.httpcomponents.httpcore>4.4.13</version.httpcomponents.httpcore>
-		<version.commons.io>2.5</version.commons.io>
+		<version.commons.io>2.7</version.commons.io>
 		<version.commons.codec>1.11</version.commons.codec>
 		<version.jackson.databind>2.9.10.7</version.jackson.databind>
 		<version.jackson.annotations>2.9.10</version.jackson.annotations>
