@@ -18,6 +18,8 @@ import com.documaster.rms.noark.ws.constants.Dokumenttype;
 import com.documaster.rms.noark.ws.constants.Ekspederingskanal;
 import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
+import com.documaster.rms.noark.ws.constants.Kassasjonshjemmel;
+import com.documaster.rms.noark.ws.constants.Kassasjonsvedtak;
 import com.documaster.rms.noark.ws.constants.Korrespondanseparttype;
 import com.documaster.rms.noark.ws.constants.Lovreferanse;
 import com.documaster.rms.noark.ws.constants.Mappetype;
@@ -134,6 +136,8 @@ public enum NoarkObjectMappings {
 		putCodeValueMapping(codeValueMappings, Plantype.class);
 		putCodeValueMapping(codeValueMappings, Planstatus.class);
 		putCodeValueMapping(codeValueMappings, Lovreferanse.class);
+		putCodeValueMapping(codeValueMappings, Kassasjonshjemmel.class);
+		putCodeValueMapping(codeValueMappings, Kassasjonsvedtak.class);
 
 		return Collections.unmodifiableMap(codeValueMappings);
 	}
