@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class Dokument extends NoarkEntityBase<Dokument> {
+public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 
 	public static final String REGISTRERING_LINK = "refRegistrering";
 	public static final String EKSTERN_ID_LINK = "refEksternId";
