@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Date;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Dokumentmedium;
@@ -27,6 +29,13 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 	private String beskrivelse;
 	private String forfatter;
 	private Integer dokumentnummer;
+
+	private Date kassertDato;
+
+	private String kassertAv;
+
+	private String kassertAvBrukerIdent;
+
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
@@ -65,9 +74,15 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 	private Dokument(
 			@JsonProperty("id") String id,
 			@JsonProperty("uuid") String uuid,
-			@JsonProperty("version") String version) {
+			@JsonProperty("version") String version,
+			@JsonProperty("kassertDato") Date kassertDato,
+			@JsonProperty("kassertAv") String kassertAv,
+			@JsonProperty("kassertAvBrukerIdent") String kassertAvBrukerIdent) {
 
 		super(id, uuid, version);
+		this.kassertDato = kassertDato;
+		this.kassertAv = kassertAv;
+		this.kassertAvBrukerIdent = kassertAvBrukerIdent;
 	}
 
 	public String getTittel() {
@@ -129,6 +144,21 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 	public void setDokumentnummer(Integer dokumentnummer) {
 
 		this.dokumentnummer = dokumentnummer;
+	}
+
+	public Date getKassertDato() {
+
+		return kassertDato;
+	}
+
+	public String getKassertAv() {
+
+		return kassertAv;
+	}
+
+	public String getKassertAvBrukerIdent() {
+
+		return kassertAvBrukerIdent;
 	}
 
 	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
