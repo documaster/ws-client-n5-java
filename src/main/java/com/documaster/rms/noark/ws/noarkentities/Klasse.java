@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class Klasse extends FinalizedEntityBase<Klasse> {
+public class Klasse extends DisposableFinalizedEntityBase<Klasse> {
 
 	public static final String KLASSIFIKASJONSSYSTEM_LINK = "refKlassifikasjonssystem";
 	public static final String FORELDER_KLASSE_LINK = "refForelderKlasse";

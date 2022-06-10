@@ -17,7 +17,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>> extends FinalizedEntityBase<TEntity>
+public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>>
+		extends DisposableFinalizedEntityBase<TEntity>
 		implements AbstraktRegistrering {
 
 	public static final String MAPPE_LINK = "refMappe";

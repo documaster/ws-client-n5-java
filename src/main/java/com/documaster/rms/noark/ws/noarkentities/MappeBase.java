@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends FinalizedEntityBase<TEntity>
+public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends DisposableFinalizedEntityBase<TEntity>
 		implements AbstraktMappe {
 
 	public static final String ARKIVDEL_LINK = "refArkivdel";
