@@ -2,6 +2,8 @@ package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
 
+import com.documaster.rms.noark.ws.client.action.LinkAction;
+import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
 import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
@@ -14,6 +16,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class Journalpost extends RegistreringBase<Journalpost> {
+
+	public static final String AVSKRIVNING_LINK = "refAvskrivning";
+	public static final String TILKNYTTET_AVSKRIVNING_LINK = "refTilknyttetAvskrivning";
 
 	private Integer journalaar;
 	private Integer journalsekvensnummer;
@@ -170,5 +175,35 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public void setPrefiks(String prefiks) {
 
 		this.prefiks = prefiks;
+	}
+
+	public LinkAction<Journalpost> linkAvskrivning(String... avskrivningIds) {
+
+		return link(AVSKRIVNING_LINK, avskrivningIds);
+	}
+
+	public LinkAction<Journalpost> linkAvskrivning(Avskrivning... avskrivnings) {
+
+		return link(AVSKRIVNING_LINK, avskrivnings);
+	}
+
+	public LinkAction<Journalpost> linkTilknyttetAvskrivning(String... avskrivningIds) {
+
+		return link(TILKNYTTET_AVSKRIVNING_LINK, avskrivningIds);
+	}
+
+	public LinkAction<Journalpost> linkTilknyttetAvskrivning(Avskrivning... avskrivnings) {
+
+		return link(TILKNYTTET_AVSKRIVNING_LINK, avskrivnings);
+	}
+
+	public UnlinkAction<Journalpost> unlinkTilknyttetAvskrivning(String... avskrivningIds) {
+
+		return unlink(TILKNYTTET_AVSKRIVNING_LINK, avskrivningIds);
+	}
+
+	public UnlinkAction<Journalpost> unlinkTilknyttetAvskrivning(Avskrivning... avskrivnings) {
+
+		return unlink(TILKNYTTET_AVSKRIVNING_LINK, avskrivnings);
 	}
 }
