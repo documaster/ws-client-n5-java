@@ -10,6 +10,8 @@ import com.documaster.rms.noark.ws.client.bsm.BsmGroup;
 import com.documaster.rms.noark.ws.client.bsm.BusinessSpecificMetadataInfo;
 import com.documaster.rms.noark.ws.client.codelist.CodeList;
 import com.documaster.rms.noark.ws.client.codelist.CodeValue;
+import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextRequest;
+import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextResponse;
 import com.documaster.rms.noark.ws.client.query.Query;
 import com.documaster.rms.noark.ws.client.transaction.Transaction;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentfil;
@@ -22,6 +24,8 @@ public interface NoarkRmsClient {
 	<TEntity extends NoarkEntity> Query<TEntity> query(Class<TEntity> entityClass, int limit);
 
 	<TEntity extends NoarkEntity> Query<TEntity> query(Class<TEntity> entityClass, String queryString, int limit);
+
+	FullTextResponse fullTextSearch(FullTextRequest request);
 
 	Dokumentfil upload(InputStream inputStream, String fileName);
 
