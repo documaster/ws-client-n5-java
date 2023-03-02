@@ -1,14 +1,15 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.AdministrativEnhet;
 import com.documaster.rms.noark.ws.constants.Saksstatus;
+import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
-import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,6 +37,7 @@ public class Saksmappe extends MappeBase<Saksmappe> {
 	private Saksstatus saksstatus;
 
 	private String prefiks;
+	private boolean serializePrefiks;
 
 	public Saksmappe(String tittel, AdministrativEnhet administrativEnhet) {
 
@@ -127,9 +129,22 @@ public class Saksmappe extends MappeBase<Saksmappe> {
 		return prefiks;
 	}
 
+	@JsonProperty("prefiks")
 	public void setPrefiks(String prefiks) {
 
 		this.prefiks = prefiks;
+		serializePrefiks = true;
+	}
+
+	@JsonProperty("prefiks")
+	public Optional<String> getPrefiksAsOptional() {
+
+		if (serializePrefiks) {
+
+			return Optional.ofNullable(prefiks);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Saksmappe> linkRegistrering(String... registreringIds) {

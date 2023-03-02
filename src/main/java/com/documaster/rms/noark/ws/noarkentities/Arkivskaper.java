@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +14,7 @@ public class Arkivskaper extends NoarkEntityBase<Arkivskaper> {
 	private String arkivskaperIdent;
 	private String arkivskaperNavn;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 
 	public Arkivskaper(String arkivskaperIdent, String arkivskaperNavn) {
 
@@ -53,9 +56,22 @@ public class Arkivskaper extends NoarkEntityBase<Arkivskaper> {
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Arkivskaper> linkArkiv(String arkivId) {

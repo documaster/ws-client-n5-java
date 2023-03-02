@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
@@ -10,6 +11,7 @@ import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,12 +29,14 @@ public class Arkivdel extends FinalizedEntityBase<Arkivdel> {
 
 	private String tittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date arkivperiodeStartDato;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date arkivperiodeSluttDato;
+	private boolean serializeArkivperiodeSluttDato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -42,9 +46,11 @@ public class Arkivdel extends FinalizedEntityBase<Arkivdel> {
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Dokumentmedium dokumentmedium;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Skjerming skjerming;
+
+	private boolean serializeSkjerming;
 
 	public Arkivdel(String tittel) {
 
@@ -75,9 +81,22 @@ public class Arkivdel extends FinalizedEntityBase<Arkivdel> {
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public Arkivdelstatus getArkivdelstatus() {
@@ -115,9 +134,22 @@ public class Arkivdel extends FinalizedEntityBase<Arkivdel> {
 		return arkivperiodeSluttDato;
 	}
 
+	@JsonProperty("arkivperiodeSluttDato")
 	public void setArkivperiodeSluttDato(Date arkivperiodeSluttDato) {
 
 		this.arkivperiodeSluttDato = arkivperiodeSluttDato;
+		serializeArkivperiodeSluttDato = true;
+	}
+
+	@JsonProperty("arkivperiodeSluttDato")
+	public Optional<Date> getArkivperiodeSluttDatoAsOptional() {
+
+		if (serializeArkivperiodeSluttDato) {
+
+			return Optional.ofNullable(arkivperiodeSluttDato);
+		}
+
+		return null;
 	}
 
 	public Skjerming getSkjerming() {
@@ -125,9 +157,22 @@ public class Arkivdel extends FinalizedEntityBase<Arkivdel> {
 		return skjerming;
 	}
 
+	@JsonProperty("skjerming")
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+		serializeSkjerming = true;
+	}
+
+	@JsonProperty("skjerming")
+	public Optional<Skjerming> getSkjermingAsOptional() {
+
+		if (serializeSkjerming) {
+
+			return Optional.ofNullable(skjerming);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Arkivdel> linkArkiv(String... arkivIds) {

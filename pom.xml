@@ -43,6 +43,7 @@
 		<version.jackson.databind>2.9.10.8</version.jackson.databind>
 		<version.jackson.annotations>2.9.10</version.jackson.annotations>
 		<version.jackson.core>2.9.10</version.jackson.core>
+		<version.jackson.datatype>2.9.10</version.jackson.datatype>
 		<version.source.plugin>3.1.0</version.source.plugin>
 		<version.javadoc.plugin>3.1.0</version.javadoc.plugin>
 	</properties>
@@ -95,6 +96,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${version.jackson.core}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
+			<version>${version.jackson.datatype}</version>
 		</dependency>
 
 	</dependencies>

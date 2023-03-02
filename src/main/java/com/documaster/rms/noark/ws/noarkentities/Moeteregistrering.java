@@ -1,11 +1,14 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.constants.AdministrativEnhet;
 import com.documaster.rms.noark.ws.constants.Moeteregistreringsstatus;
 import com.documaster.rms.noark.ws.constants.Moeteregistreringstype;
 import com.documaster.rms.noark.ws.constants.Moetesakstype;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -16,6 +19,7 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 	private String saksbehandler;
 
 	private String saksnummer;
+	private boolean serializeSaksnummer;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -25,13 +29,17 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Moeteregistreringstype moeteregistreringstype;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Moetesakstype moetesakstype;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	private boolean serializeMoetesakstype;
+
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Moeteregistreringsstatus moeteregistreringsstatus;
+
+	private boolean serializeMoeteregistreringsstatus;
 
 	public Moeteregistrering(
 			String tittel, String saksbehandler, AdministrativEnhet administrativEnhet,
@@ -67,9 +75,22 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 		return saksnummer;
 	}
 
+	@JsonProperty("saksnummer")
 	public void setSaksnummer(String saksnummer) {
 
 		this.saksnummer = saksnummer;
+		serializeSaksnummer = true;
+	}
+
+	@JsonProperty("saksnummer")
+	public Optional<String> getSaksnummerAsOptional() {
+
+		if (serializeSaksnummer) {
+
+			return Optional.ofNullable(saksnummer);
+		}
+
+		return null;
 	}
 
 	public AdministrativEnhet getAdministrativEnhet() {
@@ -97,9 +118,22 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 		return moetesakstype;
 	}
 
+	@JsonProperty("moetesakstype")
 	public void setMoetesakstype(Moetesakstype moetesakstype) {
 
 		this.moetesakstype = moetesakstype;
+		serializeMoetesakstype = true;
+	}
+
+	@JsonProperty("moetesakstype")
+	public Optional<Moetesakstype> getMoetesakstypeAsOptional() {
+
+		if (serializeMoetesakstype) {
+
+			return Optional.ofNullable(moetesakstype);
+		}
+
+		return null;
 	}
 
 	public Moeteregistreringsstatus getMoeteregistreringsstatus() {
@@ -107,9 +141,21 @@ public class Moeteregistrering extends RegistreringBase<Moeteregistrering> {
 		return moeteregistreringsstatus;
 	}
 
-	public void setMoeteregistreringsstatus(
-			Moeteregistreringsstatus moeteregistreringsstatus) {
+	@JsonProperty("moeteregistreringsstatus")
+	public void setMoeteregistreringsstatus(Moeteregistreringsstatus moeteregistreringsstatus) {
 
 		this.moeteregistreringsstatus = moeteregistreringsstatus;
+		serializeMoeteregistreringsstatus = true;
+	}
+
+	@JsonProperty("moeteregistreringsstatus")
+	public Optional<Moeteregistreringsstatus> getMoeteregistreringsstatusAsOptional() {
+
+		if (serializeMoeteregistreringsstatus) {
+
+			return Optional.ofNullable(moeteregistreringsstatus);
+		}
+
+		return null;
 	}
 }
