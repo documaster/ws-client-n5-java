@@ -21,6 +21,8 @@ import com.documaster.rms.noark.ws.client.codelist.CodeList;
 import com.documaster.rms.noark.ws.client.codelist.CodeListResponse;
 import com.documaster.rms.noark.ws.client.codelist.CodeValue;
 import com.documaster.rms.noark.ws.client.exceptions.ServiceException;
+import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextRequest;
+import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextResponse;
 import com.documaster.rms.noark.ws.client.handlers.BeanResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.ErrorResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.OutputStreamResponseHandler;
@@ -43,6 +45,7 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 	public static final String QUERY_PATH = NOARK_SERVICE_PATH + "/query";
 	public static final String DOWNLOAD_PATH = NOARK_SERVICE_PATH + "/download";
 	public static final String UPLOAD_PATH = NOARK_SERVICE_PATH + "/upload";
+	public static final String FULL_TEXT_SEARCH_PATH = NOARK_SERVICE_PATH + "/full-text/search";
 
 	public static final String CODE_LISTS_PATH = NOARK_SERVICE_PATH + "/code-lists";
 	public static final String CODE_LISTS_SAVE_LIST_VALUE_PATH = CODE_LISTS_PATH + "/{listId}/{code}";
@@ -101,6 +104,14 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 		}
 
 		return new Query<>(getClient(), entityClass, queryString, limit);
+	}
+
+	@Override
+	public FullTextResponse fullTextSearch(FullTextRequest request) {
+
+		return call(getClient().getServerAddress(), FULL_TEXT_SEARCH_PATH, HttpMethod.POST, request,
+				new BeanResponseHandler<>(getClient().getMapper(), FullTextResponse.class, getErrorHandler()))
+				.getBean();
 	}
 
 	@Override
