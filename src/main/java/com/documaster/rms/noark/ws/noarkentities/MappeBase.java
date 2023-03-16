@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Dokumentmedium;
@@ -8,6 +10,7 @@ import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,20 +36,26 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 	private String mappeIdent;
 	private String tittel;
 	private String offentligTittel;
+	private boolean serializeOffentligTittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Dokumentmedium dokumentmedium;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Skjerming skjerming;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	private boolean serializeSkjerming;
+
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Mappetype mappetype;
+
+	private boolean serializeMappetype;
 
 	protected MappeBase() {
 
@@ -86,9 +95,22 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 		return offentligTittel;
 	}
 
+	@JsonProperty("offentligTittel")
 	public void setOffentligTittel(String offentligTittel) {
 
 		this.offentligTittel = offentligTittel;
+		serializeOffentligTittel = true;
+	}
+
+	@JsonProperty("offentligTittel")
+	public Optional<String> getOffentligTittelAsOptional() {
+
+		if (serializeOffentligTittel) {
+
+			return Optional.ofNullable(offentligTittel);
+		}
+
+		return null;
 	}
 
 	public String getBeskrivelse() {
@@ -96,9 +118,22 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
@@ -126,9 +161,22 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 		return skjerming;
 	}
 
+	@JsonProperty("skjerming")
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+		serializeSkjerming = true;
+	}
+
+	@JsonProperty("skjerming")
+	public Optional<Skjerming> getSkjermingAsOptional() {
+
+		if (serializeSkjerming) {
+
+			return Optional.ofNullable(skjerming);
+		}
+
+		return null;
 	}
 
 	public Mappetype getMappetype() {
@@ -136,9 +184,22 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 		return mappetype;
 	}
 
+	@JsonProperty("mappetype")
 	public void setMappetype(Mappetype mappetype) {
 
 		this.mappetype = mappetype;
+		serializeMappetype = true;
+	}
+
+	@JsonProperty("mappetype")
+	public Optional<Mappetype> getMappetypeAsOptional() {
+
+		if (serializeMappetype) {
+
+			return Optional.ofNullable(mappetype);
+		}
+
+		return null;
 	}
 
 	public LinkAction<TEntity> linkPrimaerKlasse(String klasseId) {

@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
@@ -26,11 +27,14 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	private String journalansvarlig;
 	private String journalansvarligBrukerIdent;
 	private Date mottattDato;
+	private boolean serializeMottattDato;
 	private Date sendtDato;
+	private boolean serializeSendtDato;
 	private Boolean skjermKorrespondanseParterEInnsyn;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date offentlighetsvurdertDato;
+	private boolean serializeOffentlighetsvurdertDato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -41,6 +45,7 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	private Journalstatus journalstatus;
 
 	private String prefiks;
+	private boolean serializePrefiks;
 
 	public Journalpost(String tittel, Journalposttype type) {
 
@@ -132,9 +137,22 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 		return mottattDato;
 	}
 
+	@JsonProperty("mottattDato")
 	public void setMottattDato(Date mottattDato) {
 
 		this.mottattDato = mottattDato;
+		serializeMottattDato = true;
+	}
+
+	@JsonProperty("mottattDato")
+	public Optional<Date> getMottattDatoAsOptional() {
+
+		if (serializeMottattDato) {
+
+			return Optional.ofNullable(mottattDato);
+		}
+
+		return null;
 	}
 
 	public Date getSendtDato() {
@@ -142,9 +160,22 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 		return sendtDato;
 	}
 
+	@JsonProperty("sendtDato")
 	public void setSendtDato(Date sendtDato) {
 
 		this.sendtDato = sendtDato;
+		serializeSendtDato = true;
+	}
+
+	@JsonProperty("sendtDato")
+	public Optional<Date> getSendtDatoAsOptional() {
+
+		if (serializeSendtDato) {
+
+			return Optional.ofNullable(sendtDato);
+		}
+
+		return null;
 	}
 
 	public Boolean getSkjermKorrespondanseParterEInnsyn() {
@@ -162,9 +193,22 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 		return offentlighetsvurdertDato;
 	}
 
+	@JsonProperty("offentlighetsvurdertDato")
 	public void setOffentlighetsvurdertDato(Date offentlighetsvurdertDato) {
 
 		this.offentlighetsvurdertDato = offentlighetsvurdertDato;
+		serializeOffentlighetsvurdertDato = true;
+	}
+
+	@JsonProperty("offentlighetsvurdertDato")
+	public Optional<Date> getOffentlighetsvurdertDatoAsOptional() {
+
+		if (serializeOffentlighetsvurdertDato) {
+
+			return Optional.ofNullable(offentlighetsvurdertDato);
+		}
+
+		return null;
 	}
 
 	public String getPrefiks() {
@@ -172,9 +216,22 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 		return prefiks;
 	}
 
+	@JsonProperty("prefiks")
 	public void setPrefiks(String prefiks) {
 
 		this.prefiks = prefiks;
+		serializePrefiks = true;
+	}
+
+	@JsonProperty("prefiks")
+	public Optional<String> getPrefiksAsOptional() {
+
+		if (serializePrefiks) {
+
+			return Optional.ofNullable(prefiks);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Journalpost> linkAvskrivning(String... avskrivningIds) {

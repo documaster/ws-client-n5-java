@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,6 +13,7 @@ public class Moetedeltaker extends NoarkEntityBase<Moetedeltaker> {
 
 	private String navn;
 	private String funksjon;
+	private boolean serializeFunksjon;
 
 	public Moetedeltaker(String navn) {
 
@@ -41,9 +44,22 @@ public class Moetedeltaker extends NoarkEntityBase<Moetedeltaker> {
 		return funksjon;
 	}
 
+	@JsonProperty("funksjon")
 	public void setFunksjon(String funksjon) {
 
 		this.funksjon = funksjon;
+		serializeFunksjon = true;
+	}
+
+	@JsonProperty("funksjon")
+	public Optional<String> getFunksjonAsOptional() {
+
+		if (serializeFunksjon) {
+
+			return Optional.ofNullable(funksjon);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Moetedeltaker> linkMappe(String moetemappeId) {

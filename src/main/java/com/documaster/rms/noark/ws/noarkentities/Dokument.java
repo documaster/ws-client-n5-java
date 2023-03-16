@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
@@ -12,6 +13,7 @@ import com.documaster.rms.noark.ws.constants.TilknyttetRegistreringSom;
 import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +29,9 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 
 	private String tittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 	private String forfatter;
+	private boolean serializeForfatter;
 	private Integer dokumentnummer;
 
 	private Date kassertDato;
@@ -46,17 +50,21 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private TilknyttetRegistreringSom tilknyttetRegistreringSom;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Dokumenttype dokumenttype;
+
+	private boolean serializeDokumenttype;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Dokumentstatus dokumentstatus;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Skjerming skjerming;
+
+	private boolean serializeSkjerming;
 
 	public Dokument(String tittel, TilknyttetRegistreringSom tilknyttetRegistreringSom) {
 
@@ -100,9 +108,22 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public String getForfatter() {
@@ -110,9 +131,22 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 		return forfatter;
 	}
 
+	@JsonProperty("forfatter")
 	public void setForfatter(String forfatter) {
 
 		this.forfatter = forfatter;
+		serializeForfatter = true;
+	}
+
+	@JsonProperty("forfatter")
+	public Optional<String> getForfatterAsOptional() {
+
+		if (serializeForfatter) {
+
+			return Optional.ofNullable(forfatter);
+		}
+
+		return null;
 	}
 
 	public Dokumentmedium getDokumentmedium() {
@@ -176,9 +210,22 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 		return dokumenttype;
 	}
 
+	@JsonProperty("dokumenttype")
 	public void setDokumenttype(Dokumenttype dokumenttype) {
 
 		this.dokumenttype = dokumenttype;
+		serializeDokumenttype = true;
+	}
+
+	@JsonProperty("dokumenttype")
+	public Optional<Dokumenttype> getDokumenttypeAsOptional() {
+
+		if (serializeDokumenttype) {
+
+			return Optional.ofNullable(dokumenttype);
+		}
+
+		return null;
 	}
 
 	public Dokumentstatus getDokumentstatus() {
@@ -196,9 +243,22 @@ public class Dokument extends DisposableFinalizedEntityBase<Dokument> {
 		return skjerming;
 	}
 
+	@JsonProperty("skjerming")
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+		serializeSkjerming = true;
+	}
+
+	@JsonProperty("skjerming")
+	public Optional<Skjerming> getSkjermingAsOptional() {
+
+		if (serializeSkjerming) {
+
+			return Optional.ofNullable(skjerming);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Dokument> linkMerknad(String... merknadIds) {

@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,7 +15,9 @@ public class Klassifikasjonssystem extends FinalizedEntityBase<Klassifikasjonssy
 
 	private String tittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 	private String klassifikasjonstype;
+	private boolean serializeKlassifikasjonstype;
 
 	public Klassifikasjonssystem(String tittel) {
 
@@ -44,9 +48,22 @@ public class Klassifikasjonssystem extends FinalizedEntityBase<Klassifikasjonssy
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public String getKlassifikasjonstype() {
@@ -54,9 +71,22 @@ public class Klassifikasjonssystem extends FinalizedEntityBase<Klassifikasjonssy
 		return klassifikasjonstype;
 	}
 
+	@JsonProperty("klassifikasjonstype")
 	public void setKlassifikasjonstype(String klassifikasjonstype) {
 
 		this.klassifikasjonstype = klassifikasjonstype;
+		serializeKlassifikasjonstype = true;
+	}
+
+	@JsonProperty("klassifikasjonstype")
+	public Optional<String> getKlassifikasjonstypeAsOptional() {
+
+		if (serializeKlassifikasjonstype) {
+
+			return Optional.ofNullable(klassifikasjonstype);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Klassifikasjonssystem> linkKlasse(String... klasseIds) {

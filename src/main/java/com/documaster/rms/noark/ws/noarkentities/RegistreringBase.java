@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
@@ -10,6 +11,7 @@ import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,26 +41,34 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	private String registreringsIdent;
 	private String tittel;
 	private String offentligTittel;
+	private boolean serializeOffentligTittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 	private String forfatter;
+	private boolean serializeForfatter;
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date registreringsDato;
+	private boolean serializeRegistreringsDato;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date dokumentetsDato;
+	private boolean serializeDokumentetsDato;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date forfallsdato;
+	private boolean serializeForfallsdato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Dokumentmedium dokumentmedium;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Skjerming skjerming;
+
+	private boolean serializeSkjerming;
 
 	protected RegistreringBase() {
 
@@ -98,9 +108,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return offentligTittel;
 	}
 
+	@JsonProperty("offentligTittel")
 	public void setOffentligTittel(String offentligTittel) {
 
 		this.offentligTittel = offentligTittel;
+		serializeOffentligTittel = true;
+	}
+
+	@JsonProperty("offentligTittel")
+	public Optional<String> getOffentligTittelAsOptional() {
+
+		if (serializeOffentligTittel) {
+
+			return Optional.ofNullable(offentligTittel);
+		}
+
+		return null;
 	}
 
 	public String getBeskrivelse() {
@@ -108,9 +131,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public String getForfatter() {
@@ -118,9 +154,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return forfatter;
 	}
 
+	@JsonProperty("forfatter")
 	public void setForfatter(String forfatter) {
 
 		this.forfatter = forfatter;
+		serializeForfatter = true;
+	}
+
+	@JsonProperty("forfatter")
+	public Optional<String> getForfatterAsOptional() {
+
+		if (serializeForfatter) {
+
+			return Optional.ofNullable(forfatter);
+		}
+
+		return null;
 	}
 
 	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
@@ -139,9 +188,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return registreringsDato;
 	}
 
+	@JsonProperty("registreringsDato")
 	public void setRegistreringsDato(Date registreringsDato) {
 
 		this.registreringsDato = registreringsDato;
+		serializeRegistreringsDato = true;
+	}
+
+	@JsonProperty("registreringsDato")
+	public Optional<Date> getRegistreringsDatoAsOptional() {
+
+		if (serializeRegistreringsDato) {
+
+			return Optional.ofNullable(registreringsDato);
+		}
+
+		return null;
 	}
 
 	public Date getDokumentetsDato() {
@@ -149,9 +211,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return dokumentetsDato;
 	}
 
+	@JsonProperty("dokumentetsDato")
 	public void setDokumentetsDato(Date dokumentetsDato) {
 
 		this.dokumentetsDato = dokumentetsDato;
+		serializeDokumentetsDato = true;
+	}
+
+	@JsonProperty("dokumentetsDato")
+	public Optional<Date> getDokumentetsDatoAsOptional() {
+
+		if (serializeDokumentetsDato) {
+
+			return Optional.ofNullable(dokumentetsDato);
+		}
+
+		return null;
 	}
 
 	public Date getForfallsdato() {
@@ -159,9 +234,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return forfallsdato;
 	}
 
+	@JsonProperty("forfallsdato")
 	public void setForfallsdato(Date forfallsdato) {
 
 		this.forfallsdato = forfallsdato;
+		serializeForfallsdato = true;
+	}
+
+	@JsonProperty("forfallsdato")
+	public Optional<Date> getForfallsdatoAsOptional() {
+
+		if (serializeForfallsdato) {
+
+			return Optional.ofNullable(forfallsdato);
+		}
+
+		return null;
 	}
 
 	public Dokumentmedium getDokumentmedium() {
@@ -179,9 +267,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return skjerming;
 	}
 
+	@JsonProperty("skjerming")
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+		serializeSkjerming = true;
+	}
+
+	@JsonProperty("skjerming")
+	public Optional<Skjerming> getSkjermingAsOptional() {
+
+		if (serializeSkjerming) {
+
+			return Optional.ofNullable(skjerming);
+		}
+
+		return null;
 	}
 
 	public LinkAction<TEntity> linkDokument(String... dokumentIds) {

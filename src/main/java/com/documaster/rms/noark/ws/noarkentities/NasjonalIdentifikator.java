@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +14,7 @@ public abstract class NasjonalIdentifikator<TEntity extends NasjonalIdentifikato
 	public static final String REGISTRERING_LINK = "refRegistrering";
 
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 
 	protected NasjonalIdentifikator() {
 
@@ -31,9 +34,22 @@ public abstract class NasjonalIdentifikator<TEntity extends NasjonalIdentifikato
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public LinkAction<TEntity> linkMappe(String mappeId) {

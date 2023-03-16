@@ -1,11 +1,14 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.constants.AdministrativEnhet;
 import com.documaster.rms.noark.ws.constants.Ekspederingskanal;
 import com.documaster.rms.noark.ws.constants.Korrespondanseparttype;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,18 +21,23 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 
 	private String korrespondansepartNavn;
 	private String saksbehandler;
+	private boolean serializeSaksbehandler;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Korrespondanseparttype korrespondanseparttype;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private AdministrativEnhet administrativEnhet;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	private boolean serializeAdministrativEnhet;
+
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Ekspederingskanal ekspederingskanal;
+
+	private boolean serializeEkspederingskanal;
 
 	public Korrespondansepart(Korrespondanseparttype type, String korrespondansepartNavn) {
 
@@ -71,9 +79,22 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 		return administrativEnhet;
 	}
 
+	@JsonProperty("administrativEnhet")
 	public void setAdministrativEnhet(AdministrativEnhet administrativEnhet) {
 
 		this.administrativEnhet = administrativEnhet;
+		serializeAdministrativEnhet = true;
+	}
+
+	@JsonProperty("administrativEnhet")
+	public Optional<AdministrativEnhet> getAdministrativEnhetAsOptional() {
+
+		if (serializeAdministrativEnhet) {
+
+			return Optional.ofNullable(administrativEnhet);
+		}
+
+		return null;
 	}
 
 	public String getSaksbehandler() {
@@ -81,9 +102,22 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 		return saksbehandler;
 	}
 
+	@JsonProperty("saksbehandler")
 	public void setSaksbehandler(String saksbehandler) {
 
 		this.saksbehandler = saksbehandler;
+		serializeSaksbehandler = true;
+	}
+
+	@JsonProperty("saksbehandler")
+	public Optional<String> getSaksbehandlerAsOptional() {
+
+		if (serializeSaksbehandler) {
+
+			return Optional.ofNullable(saksbehandler);
+		}
+
+		return null;
 	}
 
 	public Ekspederingskanal getEkspederingskanal() {
@@ -91,9 +125,22 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 		return ekspederingskanal;
 	}
 
+	@JsonProperty("ekspederingskanal")
 	public void setEkspederingskanal(Ekspederingskanal ekspederingskanal) {
 
 		this.ekspederingskanal = ekspederingskanal;
+		serializeEkspederingskanal = true;
+	}
+
+	@JsonProperty("ekspederingskanal")
+	public Optional<Ekspederingskanal> getEkspederingskanalAsOptional() {
+
+		if (serializeEkspederingskanal) {
+
+			return Optional.ofNullable(ekspederingskanal);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Korrespondansepart> linkRegistrering(String registreringId) {
