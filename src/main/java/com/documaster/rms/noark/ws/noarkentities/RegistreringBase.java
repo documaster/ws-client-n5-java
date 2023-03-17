@@ -445,6 +445,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return link(KRYSSREFERANSE_TIL_MAPPE_LINK, mappe);
 	}
 
+	public UnlinkAction<TEntity> removeKryssreferanseTilMappe(String... mappeIds) {
+
+		return unlink(KRYSSREFERANSE_TIL_MAPPE_LINK, mappeIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseTilMappe(AbstraktMappe... mappe) {
+
+		return unlink(KRYSSREFERANSE_TIL_MAPPE_LINK, mappe);
+	}
+
 	public LinkAction<TEntity> addKryssreferanseFraMappe(String... mappeIds) {
 
 		return link(KRYSSREFERANSE_FRA_MAPPE_LINK, mappeIds);
@@ -453,6 +463,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public LinkAction<TEntity> addKryssreferanseFraMappe(AbstraktMappe... mappe) {
 
 		return link(KRYSSREFERANSE_FRA_MAPPE_LINK, mappe);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraMappe(String... mappeIds) {
+
+		return unlink(KRYSSREFERANSE_FRA_MAPPE_LINK, mappeIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraMappe(AbstraktMappe... mappe) {
+
+		return unlink(KRYSSREFERANSE_FRA_MAPPE_LINK, mappe);
 	}
 
 	public LinkAction<TEntity> addKryssreferanseTilRegistrering(String... registreringIds) {
@@ -465,6 +485,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return link(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registrering);
 	}
 
+	public UnlinkAction<TEntity> removeKryssreferanseTilRegistrering(String... registreringIds) {
+
+		return unlink(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registreringIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseTilRegistrering(AbstraktRegistrering... registrering) {
+
+		return unlink(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registrering);
+	}
+
 	public LinkAction<TEntity> addKryssreferanseFraRegistrering(String... registreringIds) {
 
 		return link(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registreringIds);
@@ -473,6 +503,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public LinkAction<TEntity> addKryssreferanseFraRegistrering(AbstraktRegistrering... registrering) {
 
 		return link(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registrering);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraRegistrering(String... registreringIds) {
+
+		return unlink(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registreringIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraRegistrering(AbstraktRegistrering... registrering) {
+
+		return unlink(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registrering);
 	}
 
 	@JsonIgnore
