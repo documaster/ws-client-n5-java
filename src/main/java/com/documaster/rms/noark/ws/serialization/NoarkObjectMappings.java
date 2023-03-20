@@ -31,6 +31,9 @@ import com.documaster.rms.noark.ws.constants.Moeteregistreringstype;
 import com.documaster.rms.noark.ws.constants.Moetesakstype;
 import com.documaster.rms.noark.ws.constants.Planstatus;
 import com.documaster.rms.noark.ws.constants.Plantype;
+import com.documaster.rms.noark.ws.constants.PresedensHjemmel;
+import com.documaster.rms.noark.ws.constants.PresedensStatus;
+import com.documaster.rms.noark.ws.constants.Rettskildefaktor;
 import com.documaster.rms.noark.ws.constants.Saksstatus;
 import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.constants.TilknyttetRegistreringSom;
@@ -144,6 +147,9 @@ public enum NoarkObjectMappings {
 		putCodeValueMapping(codeValueMappings, Lovreferanse.class);
 		putCodeValueMapping(codeValueMappings, Kassasjonshjemmel.class);
 		putCodeValueMapping(codeValueMappings, Kassasjonsvedtak.class);
+		putCodeValueMapping(codeValueMappings, PresedensHjemmel.class);
+		putCodeValueMapping(codeValueMappings, PresedensStatus.class);
+		putCodeValueMapping(codeValueMappings, Rettskildefaktor.class);
 
 		return Collections.unmodifiableMap(codeValueMappings);
 	}
