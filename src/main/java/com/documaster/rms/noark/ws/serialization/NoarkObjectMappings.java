@@ -17,6 +17,7 @@ import com.documaster.rms.noark.ws.constants.Dokumentmedium;
 import com.documaster.rms.noark.ws.constants.Dokumentstatus;
 import com.documaster.rms.noark.ws.constants.Dokumenttype;
 import com.documaster.rms.noark.ws.constants.Ekspederingskanal;
+import com.documaster.rms.noark.ws.constants.FlytStatus;
 import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
 import com.documaster.rms.noark.ws.constants.Kassasjonshjemmel;
@@ -125,6 +126,7 @@ public enum NoarkObjectMappings {
 		putCodeValueMapping(codeValueMappings, Dokumentstatus.class);
 		putCodeValueMapping(codeValueMappings, Dokumenttype.class);
 		putCodeValueMapping(codeValueMappings, Ekspederingskanal.class);
+		putCodeValueMapping(codeValueMappings, FlytStatus.class);
 		putCodeValueMapping(codeValueMappings, Journalposttype.class);
 		putCodeValueMapping(codeValueMappings, Journalstatus.class);
 		putCodeValueMapping(codeValueMappings, Korrespondanseparttype.class);
