@@ -13,6 +13,9 @@ public enum FieldType {
 	@JsonProperty("double")
 	DOUBLE,
 
+	@JsonProperty("timestamp")
+	TIMESTAMP,
+
 	@JsonProperty("encrypted")
 	ENCRYPTED,
 }
