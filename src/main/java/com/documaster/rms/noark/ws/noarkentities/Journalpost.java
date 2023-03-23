@@ -20,6 +20,7 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 
 	public static final String AVSKRIVNING_LINK = "refAvskrivning";
 	public static final String TILKNYTTET_AVSKRIVNING_LINK = "refTilknyttetAvskrivning";
+	public static final String DOKUMENTFLYT_LINK = "refDokumentflyt";
 
 	private Integer journalaar;
 	private Integer journalsekvensnummer;
@@ -262,5 +263,15 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public UnlinkAction<Journalpost> unlinkTilknyttetAvskrivning(Avskrivning... avskrivnings) {
 
 		return unlink(TILKNYTTET_AVSKRIVNING_LINK, avskrivnings);
+	}
+
+	public LinkAction<Journalpost> linkDokumentflyt(String... dokumentflytIds) {
+
+		return link(DOKUMENTFLYT_LINK, dokumentflytIds);
+	}
+
+	public LinkAction<Journalpost> linkDokumentflyt(Dokumentflyt... dokumentflyts) {
+
+		return link(DOKUMENTFLYT_LINK, dokumentflyts);
 	}
 }

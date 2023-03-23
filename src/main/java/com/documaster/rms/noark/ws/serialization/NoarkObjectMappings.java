@@ -46,6 +46,7 @@ import com.documaster.rms.noark.ws.noarkentities.Avskrivning;
 import com.documaster.rms.noark.ws.noarkentities.Basisregistrering;
 import com.documaster.rms.noark.ws.noarkentities.Bygning;
 import com.documaster.rms.noark.ws.noarkentities.Dokument;
+import com.documaster.rms.noark.ws.noarkentities.Dokumentflyt;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentversjon;
 import com.documaster.rms.noark.ws.noarkentities.Eiendom;
 import com.documaster.rms.noark.ws.noarkentities.EksternId;
@@ -89,6 +90,7 @@ public enum NoarkObjectMappings {
 		putTypeMapping(typeMappings, Avskrivning.class);
 		putTypeMapping(typeMappings, Basisregistrering.class);
 		putTypeMapping(typeMappings, Dokument.class);
+		putTypeMapping(typeMappings, Dokumentflyt.class);
 		putTypeMapping(typeMappings, Dokumentversjon.class);
 		putTypeMapping(typeMappings, EksternId.class);
 		putTypeMapping(typeMappings, Journalpost.class);
