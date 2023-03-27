@@ -59,6 +59,14 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date forfallsdato;
 	private boolean serializeForfallsdato;
+	private Date mottattDato;
+	private boolean serializeMottattDato;
+	private Date sendtDato;
+	private boolean serializeSendtDato;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
+	private Date offentlighetsvurdertDato;
+	private boolean serializeOffentlighetsvurdertDato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -247,6 +255,75 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		if (serializeForfallsdato) {
 
 			return Optional.ofNullable(forfallsdato);
+		}
+
+		return null;
+	}
+
+	public Date getMottattDato() {
+
+		return mottattDato;
+	}
+
+	@JsonProperty("mottattDato")
+	public void setMottattDato(Date mottattDato) {
+
+		this.mottattDato = mottattDato;
+		serializeMottattDato = true;
+	}
+
+	@JsonProperty("mottattDato")
+	public Optional<Date> getMottattDatoAsOptional() {
+
+		if (serializeMottattDato) {
+
+			return Optional.ofNullable(mottattDato);
+		}
+
+		return null;
+	}
+
+	public Date getSendtDato() {
+
+		return sendtDato;
+	}
+
+	@JsonProperty("sendtDato")
+	public void setSendtDato(Date sendtDato) {
+
+		this.sendtDato = sendtDato;
+		serializeSendtDato = true;
+	}
+
+	@JsonProperty("sendtDato")
+	public Optional<Date> getSendtDatoAsOptional() {
+
+		if (serializeSendtDato) {
+
+			return Optional.ofNullable(sendtDato);
+		}
+
+		return null;
+	}
+
+	public Date getOffentlighetsvurdertDato() {
+
+		return offentlighetsvurdertDato;
+	}
+
+	@JsonProperty("offentlighetsvurdertDato")
+	public void setOffentlighetsvurdertDato(Date offentlighetsvurdertDato) {
+
+		this.offentlighetsvurdertDato = offentlighetsvurdertDato;
+		serializeOffentlighetsvurdertDato = true;
+	}
+
+	@JsonProperty("offentlighetsvurdertDato")
+	public Optional<Date> getOffentlighetsvurdertDatoAsOptional() {
+
+		if (serializeOffentlighetsvurdertDato) {
+
+			return Optional.ofNullable(offentlighetsvurdertDato);
 		}
 
 		return null;

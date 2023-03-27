@@ -1,17 +1,14 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
-import java.util.Date;
 import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
-import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,15 +25,7 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	private Integer journalpostnummer;
 	private String journalansvarlig;
 	private String journalansvarligBrukerIdent;
-	private Date mottattDato;
-	private boolean serializeMottattDato;
-	private Date sendtDato;
-	private boolean serializeSendtDato;
 	private Boolean skjermKorrespondanseParterEInnsyn;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
-	private Date offentlighetsvurdertDato;
-	private boolean serializeOffentlighetsvurdertDato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -134,52 +123,6 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 		this.journalstatus = journalstatus;
 	}
 
-	public Date getMottattDato() {
-
-		return mottattDato;
-	}
-
-	@JsonProperty("mottattDato")
-	public void setMottattDato(Date mottattDato) {
-
-		this.mottattDato = mottattDato;
-		serializeMottattDato = true;
-	}
-
-	@JsonProperty("mottattDato")
-	public Optional<Date> getMottattDatoAsOptional() {
-
-		if (serializeMottattDato) {
-
-			return Optional.ofNullable(mottattDato);
-		}
-
-		return null;
-	}
-
-	public Date getSendtDato() {
-
-		return sendtDato;
-	}
-
-	@JsonProperty("sendtDato")
-	public void setSendtDato(Date sendtDato) {
-
-		this.sendtDato = sendtDato;
-		serializeSendtDato = true;
-	}
-
-	@JsonProperty("sendtDato")
-	public Optional<Date> getSendtDatoAsOptional() {
-
-		if (serializeSendtDato) {
-
-			return Optional.ofNullable(sendtDato);
-		}
-
-		return null;
-	}
-
 	public Boolean getSkjermKorrespondanseParterEInnsyn() {
 
 		return skjermKorrespondanseParterEInnsyn;
@@ -188,29 +131,6 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public void setSkjermKorrespondanseParterEInnsyn(Boolean skjermKorrespondanseParterEInnsyn) {
 
 		this.skjermKorrespondanseParterEInnsyn = skjermKorrespondanseParterEInnsyn;
-	}
-
-	public Date getOffentlighetsvurdertDato() {
-
-		return offentlighetsvurdertDato;
-	}
-
-	@JsonProperty("offentlighetsvurdertDato")
-	public void setOffentlighetsvurdertDato(Date offentlighetsvurdertDato) {
-
-		this.offentlighetsvurdertDato = offentlighetsvurdertDato;
-		serializeOffentlighetsvurdertDato = true;
-	}
-
-	@JsonProperty("offentlighetsvurdertDato")
-	public Optional<Date> getOffentlighetsvurdertDatoAsOptional() {
-
-		if (serializeOffentlighetsvurdertDato) {
-
-			return Optional.ofNullable(offentlighetsvurdertDato);
-		}
-
-		return null;
 	}
 
 	public String getPrefiks() {
