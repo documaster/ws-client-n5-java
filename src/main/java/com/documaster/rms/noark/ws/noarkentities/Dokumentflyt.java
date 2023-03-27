@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Dokumentflyt extends NoarkEntityBase<Dokumentflyt> {
 
 	public static final String JOURNALPOST_LINK = "refJournalpost";
+	public static final String ARKIVNOTAT_LINK = "refArkivnotat";
 
 	private String flytFra;
 	private String flytFraBrukerIdent;
@@ -153,5 +154,15 @@ public class Dokumentflyt extends NoarkEntityBase<Dokumentflyt> {
 	public LinkAction<Dokumentflyt> linkJournalpost(Journalpost journalpost) {
 
 		return link(JOURNALPOST_LINK, journalpost);
+	}
+
+	public LinkAction<Dokumentflyt> linkArkivnotat(String arkivnotatId) {
+
+		return link(ARKIVNOTAT_LINK, arkivnotatId);
+	}
+
+	public LinkAction<Dokumentflyt> linkArkivnotat(Arkivnotat arkivnotat) {
+
+		return link(ARKIVNOTAT_LINK, arkivnotat);
 	}
 }

@@ -41,6 +41,7 @@ import com.documaster.rms.noark.ws.constants.Variantformat;
 import com.documaster.rms.noark.ws.noarkentities.Adresse;
 import com.documaster.rms.noark.ws.noarkentities.Arkiv;
 import com.documaster.rms.noark.ws.noarkentities.Arkivdel;
+import com.documaster.rms.noark.ws.noarkentities.Arkivnotat;
 import com.documaster.rms.noark.ws.noarkentities.Arkivskaper;
 import com.documaster.rms.noark.ws.noarkentities.Avskrivning;
 import com.documaster.rms.noark.ws.noarkentities.Basisregistrering;
@@ -87,6 +88,7 @@ public enum NoarkObjectMappings {
 
 		putTypeMapping(typeMappings, Arkiv.class);
 		putTypeMapping(typeMappings, Arkivdel.class);
+		putTypeMapping(typeMappings, Arkivnotat.class);
 		putTypeMapping(typeMappings, Arkivskaper.class);
 		putTypeMapping(typeMappings, Avskrivning.class);
 		putTypeMapping(typeMappings, Basisregistrering.class);
