@@ -21,6 +21,7 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public static final String AVSKRIVNING_LINK = "refAvskrivning";
 	public static final String TILKNYTTET_AVSKRIVNING_LINK = "refTilknyttetAvskrivning";
 	public static final String DOKUMENTFLYT_LINK = "refDokumentflyt";
+	public static final String PRESEDENS_LINK = "refPresedens";
 
 	private Integer journalaar;
 	private Integer journalsekvensnummer;
@@ -273,5 +274,25 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public LinkAction<Journalpost> linkDokumentflyt(Dokumentflyt... dokumentflyts) {
 
 		return link(DOKUMENTFLYT_LINK, dokumentflyts);
+	}
+
+	public LinkAction<Journalpost> linkPresedens(String... presedensIds) {
+
+		return link(PRESEDENS_LINK, presedensIds);
+	}
+
+	public LinkAction<Journalpost> linkPresedens(Presedens... presedens) {
+
+		return link(PRESEDENS_LINK, presedens);
+	}
+
+	public UnlinkAction<Journalpost> unlinkPresedens(String... presedensIds) {
+
+		return unlink(PRESEDENS_LINK, presedensIds);
+	}
+
+	public UnlinkAction<Journalpost> unlinkPresedens(Presedens... presedens) {
+
+		return unlink(PRESEDENS_LINK, presedens);
 	}
 }

@@ -62,6 +62,7 @@ import com.documaster.rms.noark.ws.noarkentities.Moeteregistrering;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntity;
 import com.documaster.rms.noark.ws.noarkentities.Noekkelord;
 import com.documaster.rms.noark.ws.noarkentities.Plan;
+import com.documaster.rms.noark.ws.noarkentities.Presedens;
 import com.documaster.rms.noark.ws.noarkentities.Saksmappe;
 import com.documaster.rms.noark.ws.noarkentities.Sakspart;
 
@@ -109,6 +110,7 @@ public enum NoarkObjectMappings {
 		putTypeMapping(typeMappings, Bygning.class);
 		putTypeMapping(typeMappings, Eiendom.class);
 		putTypeMapping(typeMappings, Plan.class);
+		putTypeMapping(typeMappings, Presedens.class);
 
 		return Collections.unmodifiableMap(typeMappings);
 	}
