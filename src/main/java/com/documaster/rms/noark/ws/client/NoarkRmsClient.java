@@ -16,6 +16,8 @@ import com.documaster.rms.noark.ws.client.query.Query;
 import com.documaster.rms.noark.ws.client.transaction.Transaction;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentfil;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntity;
+import com.documaster.rms.noark.ws.noarkentities.expand.UtvidTilJournalpost;
+import com.documaster.rms.noark.ws.noarkentities.expand.UtvidTilSaksmappe;
 
 public interface NoarkRmsClient {
 
@@ -56,4 +58,8 @@ public interface NoarkRmsClient {
 	BsmField saveBsmField(String groupId, BsmField bsmField);
 
 	void deleteBsmField(String groupId, String fieldId);
+
+	void expandFolder(String id, UtvidTilSaksmappe request);
+
+	void expandBasicRecord(String id, UtvidTilJournalpost request);
 }
