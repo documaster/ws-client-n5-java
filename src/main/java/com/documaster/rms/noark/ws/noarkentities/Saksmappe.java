@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Saksmappe extends MappeBase<Saksmappe> {
 
 	public static final String SAKSPART_LINK = "refSakspart";
+	public static final String PRESEDENS_LINK = "refPresedens";
 
 	private Integer saksaar;
 	private Integer sakssekvensnummer;
@@ -175,5 +176,25 @@ public class Saksmappe extends MappeBase<Saksmappe> {
 	public LinkAction<Saksmappe> linkSakspart(Sakspart... sakspart) {
 
 		return link(SAKSPART_LINK, sakspart);
+	}
+
+	public LinkAction<Saksmappe> linkPresedens(String... presedensIds) {
+
+		return link(PRESEDENS_LINK, presedensIds);
+	}
+
+	public LinkAction<Saksmappe> linkPresedens(Presedens... presedens) {
+
+		return link(PRESEDENS_LINK, presedens);
+	}
+
+	public UnlinkAction<Saksmappe> unlinkPresedens(String... presedensIds) {
+
+		return unlink(PRESEDENS_LINK, presedensIds);
+	}
+
+	public UnlinkAction<Saksmappe> unlinkPresedens(Presedens... presedens) {
+
+		return unlink(PRESEDENS_LINK, presedens);
 	}
 }

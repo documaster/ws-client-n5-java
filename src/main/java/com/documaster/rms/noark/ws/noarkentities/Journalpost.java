@@ -1,17 +1,14 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
-import java.util.Date;
 import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
-import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -20,21 +17,15 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 
 	public static final String AVSKRIVNING_LINK = "refAvskrivning";
 	public static final String TILKNYTTET_AVSKRIVNING_LINK = "refTilknyttetAvskrivning";
+	public static final String DOKUMENTFLYT_LINK = "refDokumentflyt";
+	public static final String PRESEDENS_LINK = "refPresedens";
 
 	private Integer journalaar;
 	private Integer journalsekvensnummer;
 	private Integer journalpostnummer;
 	private String journalansvarlig;
 	private String journalansvarligBrukerIdent;
-	private Date mottattDato;
-	private boolean serializeMottattDato;
-	private Date sendtDato;
-	private boolean serializeSendtDato;
 	private Boolean skjermKorrespondanseParterEInnsyn;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
-	private Date offentlighetsvurdertDato;
-	private boolean serializeOffentlighetsvurdertDato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -132,52 +123,6 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 		this.journalstatus = journalstatus;
 	}
 
-	public Date getMottattDato() {
-
-		return mottattDato;
-	}
-
-	@JsonProperty("mottattDato")
-	public void setMottattDato(Date mottattDato) {
-
-		this.mottattDato = mottattDato;
-		serializeMottattDato = true;
-	}
-
-	@JsonProperty("mottattDato")
-	public Optional<Date> getMottattDatoAsOptional() {
-
-		if (serializeMottattDato) {
-
-			return Optional.ofNullable(mottattDato);
-		}
-
-		return null;
-	}
-
-	public Date getSendtDato() {
-
-		return sendtDato;
-	}
-
-	@JsonProperty("sendtDato")
-	public void setSendtDato(Date sendtDato) {
-
-		this.sendtDato = sendtDato;
-		serializeSendtDato = true;
-	}
-
-	@JsonProperty("sendtDato")
-	public Optional<Date> getSendtDatoAsOptional() {
-
-		if (serializeSendtDato) {
-
-			return Optional.ofNullable(sendtDato);
-		}
-
-		return null;
-	}
-
 	public Boolean getSkjermKorrespondanseParterEInnsyn() {
 
 		return skjermKorrespondanseParterEInnsyn;
@@ -186,29 +131,6 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public void setSkjermKorrespondanseParterEInnsyn(Boolean skjermKorrespondanseParterEInnsyn) {
 
 		this.skjermKorrespondanseParterEInnsyn = skjermKorrespondanseParterEInnsyn;
-	}
-
-	public Date getOffentlighetsvurdertDato() {
-
-		return offentlighetsvurdertDato;
-	}
-
-	@JsonProperty("offentlighetsvurdertDato")
-	public void setOffentlighetsvurdertDato(Date offentlighetsvurdertDato) {
-
-		this.offentlighetsvurdertDato = offentlighetsvurdertDato;
-		serializeOffentlighetsvurdertDato = true;
-	}
-
-	@JsonProperty("offentlighetsvurdertDato")
-	public Optional<Date> getOffentlighetsvurdertDatoAsOptional() {
-
-		if (serializeOffentlighetsvurdertDato) {
-
-			return Optional.ofNullable(offentlighetsvurdertDato);
-		}
-
-		return null;
 	}
 
 	public String getPrefiks() {
@@ -262,5 +184,35 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public UnlinkAction<Journalpost> unlinkTilknyttetAvskrivning(Avskrivning... avskrivnings) {
 
 		return unlink(TILKNYTTET_AVSKRIVNING_LINK, avskrivnings);
+	}
+
+	public LinkAction<Journalpost> linkDokumentflyt(String... dokumentflytIds) {
+
+		return link(DOKUMENTFLYT_LINK, dokumentflytIds);
+	}
+
+	public LinkAction<Journalpost> linkDokumentflyt(Dokumentflyt... dokumentflyts) {
+
+		return link(DOKUMENTFLYT_LINK, dokumentflyts);
+	}
+
+	public LinkAction<Journalpost> linkPresedens(String... presedensIds) {
+
+		return link(PRESEDENS_LINK, presedensIds);
+	}
+
+	public LinkAction<Journalpost> linkPresedens(Presedens... presedens) {
+
+		return link(PRESEDENS_LINK, presedens);
+	}
+
+	public UnlinkAction<Journalpost> unlinkPresedens(String... presedensIds) {
+
+		return unlink(PRESEDENS_LINK, presedensIds);
+	}
+
+	public UnlinkAction<Journalpost> unlinkPresedens(Presedens... presedens) {
+
+		return unlink(PRESEDENS_LINK, presedens);
 	}
 }
