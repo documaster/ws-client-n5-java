@@ -31,6 +31,8 @@ import com.documaster.rms.noark.ws.client.query.Query;
 import com.documaster.rms.noark.ws.client.transaction.Transaction;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentfil;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntity;
+import com.documaster.rms.noark.ws.noarkentities.expand.UtvidTilJournalpost;
+import com.documaster.rms.noark.ws.noarkentities.expand.UtvidTilSaksmappe;
 
 public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClient {
 
@@ -56,6 +58,9 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 	public static final String BSM_REGISTRY_DELETE_GROUP_PATH = BSM_REGISTRY_PATH + "/group/{groupId}";
 	public static final String BSM_REGISTRY_SAVE_FIELD_PATH = BSM_REGISTRY_PATH + "/group/{groupId}/field/{fieldId}";
 	public static final String BSM_REGISTRY_DELETE_FIELD_PATH = BSM_REGISTRY_PATH + "/group/{groupId}/field/{fieldId}";
+	public static final String EXPAND_PATH = NOARK_SERVICE_PATH + "/expand";
+	public static final String EXPAND_FOLDER_PATH = EXPAND_PATH + "/folder";
+	public static final String EXPAND_BASIC_RECORD_PATH = EXPAND_PATH + "/record";
 
 	public NoarkClient(RmsClient client) {
 
@@ -338,6 +343,26 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 				.replace("{fieldId}", urlEncode(fieldId));
 
 		call(getClient().getServerAddress(), actionPath, HttpMethod.DELETE, new VoidResponseHandler(getErrorHandler()));
+	}
+
+	@Override
+	public void expandFolder(String id, UtvidTilSaksmappe request) {
+
+		Argument.notNullOrEmpty("id", id);
+
+		call(
+				getClient().getServerAddress(), EXPAND_FOLDER_PATH, HttpMethod.POST, request,
+				new VoidResponseHandler(getErrorHandler()));
+	}
+
+	@Override
+	public void expandBasicRecord(String id, UtvidTilJournalpost request) {
+
+		Argument.notNullOrEmpty("id", id);
+
+		call(
+				getClient().getServerAddress(), EXPAND_BASIC_RECORD_PATH, HttpMethod.POST, request,
+				new VoidResponseHandler(getErrorHandler()));
 	}
 
 	private ErrorResponseHandler getErrorHandler() {
