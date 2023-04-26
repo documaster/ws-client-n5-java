@@ -8,6 +8,8 @@ import java.util.List;
 import com.documaster.rms.noark.ws.client.bsm.BsmField;
 import com.documaster.rms.noark.ws.client.bsm.BsmGroup;
 import com.documaster.rms.noark.ws.client.bsm.BusinessSpecificMetadataInfo;
+import com.documaster.rms.noark.ws.client.changelog.ChangeLogRequest;
+import com.documaster.rms.noark.ws.client.changelog.ChangeLogResponse;
 import com.documaster.rms.noark.ws.client.codelist.CodeList;
 import com.documaster.rms.noark.ws.client.codelist.CodeValue;
 import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextRequest;
@@ -62,4 +64,6 @@ public interface NoarkRmsClient {
 	void expandFolder(String id, UtvidTilSaksmappe request);
 
 	void expandBasicRecord(String id, UtvidTilJournalpost request);
+
+	ChangeLogResponse changeLog(ChangeLogRequest request);
 }
