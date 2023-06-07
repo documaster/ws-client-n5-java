@@ -18,4 +18,10 @@ public enum FieldType {
 
 	@JsonProperty("encrypted")
 	ENCRYPTED,
+
+	@JsonProperty("uri")
+	URI,
+
+	@JsonProperty("boolean")
+	BOOLEAN,
 }
