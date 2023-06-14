@@ -17,6 +17,7 @@ import com.documaster.rms.noark.ws.StringUtils;
 import com.documaster.rms.noark.ws.client.bsm.BsmField;
 import com.documaster.rms.noark.ws.client.bsm.BsmGroup;
 import com.documaster.rms.noark.ws.client.bsm.BusinessSpecificMetadataInfo;
+import com.documaster.rms.noark.ws.client.bulk.delete.DeleteRequest;
 import com.documaster.rms.noark.ws.client.changelog.ChangeLogRequest;
 import com.documaster.rms.noark.ws.client.changelog.ChangeLogResponse;
 import com.documaster.rms.noark.ws.client.codelist.CodeList;
@@ -63,6 +64,9 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 	public static final String EXPAND_PATH = NOARK_SERVICE_PATH + "/expand";
 	public static final String EXPAND_FOLDER_PATH = EXPAND_PATH + "/folder";
 	public static final String EXPAND_BASIC_RECORD_PATH = EXPAND_PATH + "/record";
+
+	public static final String BULK_OPERATIONS_PATH = NOARK_SERVICE_PATH + "/bulk";
+	public static final String BULK_DELETE_PATH = BULK_OPERATIONS_PATH + "/delete";
 
 	public static final String CHANGE_LOG_PATH = NOARK_SERVICE_PATH + "/logs/change-log";
 
@@ -366,6 +370,16 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 		call(
 				getClient().getServerAddress(), EXPAND_BASIC_RECORD_PATH, HttpMethod.POST, request,
+				new VoidResponseHandler(getErrorHandler()));
+	}
+
+	@Override
+	public void bulkDelete(DeleteRequest request) {
+
+		Argument.notNullOrEmpty("request", request);
+
+		call(
+				getClient().getServerAddress(), BULK_DELETE_PATH, HttpMethod.POST, request,
 				new VoidResponseHandler(getErrorHandler()));
 	}
 
