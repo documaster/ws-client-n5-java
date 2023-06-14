@@ -28,6 +28,8 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 	public static final String NOEKKELORD_LINK = "refNoekkelord";
 	public static final String MERKNAD_LINK = "refMerknad";
 	public static final String NASJONAL_IDENTIFIKATOR_LINK = "refNasjonalIdentifikator";
+	public static final String POSISJON_LINK = "refPosisjon";
+	public static final String PERSON_IDENTIFIKATOR_LINK = "refPersonIdentifikator";
 	public static final String KRYSSREFERANSE_TIL_MAPPE_LINK = "refKryssreferanseTilMappe";
 	public static final String KRYSSREFERANSE_FRA_MAPPE_LINK = "refKryssreferanseFraMappe";
 	public static final String KRYSSREFERANSE_TIL_REGISTRERING_LINK = "refKryssreferanseTilRegistrering";
@@ -300,6 +302,26 @@ public abstract class MappeBase<TEntity extends MappeBase<TEntity>> extends Disp
 	public LinkAction<TEntity> linkNasjonalIdentifikator(NasjonalIdentifikator<?>... nasjonalIdentifikator) {
 
 		return link(NASJONAL_IDENTIFIKATOR_LINK, nasjonalIdentifikator);
+	}
+
+	public LinkAction<TEntity> linkPosisjon(String... posisjonIds) {
+
+		return link(POSISJON_LINK, posisjonIds);
+	}
+
+	public LinkAction<TEntity> linkPosisjon(Posisjon... posisjon) {
+
+		return link(POSISJON_LINK, posisjon);
+	}
+
+	public LinkAction<TEntity> linkPersonIdentifikator(String... personIdentifikatorIds) {
+
+		return link(PERSON_IDENTIFIKATOR_LINK, personIdentifikatorIds);
+	}
+
+	public LinkAction<TEntity> linkPersonIdentifikator(PersonIdentifikator<?>... personIdentifikator) {
+
+		return link(PERSON_IDENTIFIKATOR_LINK, personIdentifikator);
 	}
 
 	public LinkAction<TEntity> addKryssreferanseTilMappe(String... mappeIds) {
