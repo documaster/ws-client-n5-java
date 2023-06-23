@@ -8,6 +8,10 @@ public class ChangeLogRequest implements Bean {
 
 	private String id;
 
+	private boolean includeChildChanges = true;
+
+	private boolean nestChildChanges = true;
+
 	private Integer offset = 0;
 
 	private Integer limit = 10;
@@ -30,6 +34,26 @@ public class ChangeLogRequest implements Bean {
 	public void setId(String id) {
 
 		this.id = id;
+	}
+
+	public boolean getIncludeChildChanges() {
+
+		return includeChildChanges;
+	}
+
+	public void setIncludeChildChanges(boolean includeChildChanges) {
+
+		this.includeChildChanges = includeChildChanges;
+	}
+
+	public boolean getNestChildChanges() {
+
+		return nestChildChanges;
+	}
+
+	public void setNestChildChanges(boolean nestChildChanges) {
+
+		this.nestChildChanges = nestChildChanges;
 	}
 
 	public Integer getOffset() {
