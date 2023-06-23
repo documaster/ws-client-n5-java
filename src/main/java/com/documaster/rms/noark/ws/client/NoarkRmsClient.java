@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import com.documaster.rms.noark.ws.client.accesslog.AccessLogRequest;
+import com.documaster.rms.noark.ws.client.accesslog.AccessLogResponse;
 import com.documaster.rms.noark.ws.client.bsm.BsmField;
 import com.documaster.rms.noark.ws.client.bsm.BsmGroup;
 import com.documaster.rms.noark.ws.client.bsm.BusinessSpecificMetadataInfo;
@@ -69,4 +71,6 @@ public interface NoarkRmsClient {
 	void bulkDelete(DeleteRequest request);
 
 	ChangeLogResponse changeLog(ChangeLogRequest request);
+
+	AccessLogResponse accessLog(AccessLogRequest request);
 }
