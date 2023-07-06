@@ -14,6 +14,8 @@ import java.util.List;
 
 import com.documaster.rms.noark.ws.Argument;
 import com.documaster.rms.noark.ws.StringUtils;
+import com.documaster.rms.noark.ws.client.accesslog.AccessLogRequest;
+import com.documaster.rms.noark.ws.client.accesslog.AccessLogResponse;
 import com.documaster.rms.noark.ws.client.bsm.BsmField;
 import com.documaster.rms.noark.ws.client.bsm.BsmGroup;
 import com.documaster.rms.noark.ws.client.bsm.BusinessSpecificMetadataInfo;
@@ -69,6 +71,7 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 	public static final String BULK_DELETE_PATH = BULK_OPERATIONS_PATH + "/delete";
 
 	public static final String CHANGE_LOG_PATH = NOARK_SERVICE_PATH + "/logs/change-log";
+	public static final String ACCESS_LOG_PATH = NOARK_SERVICE_PATH + "/logs/access-log";
 
 	public NoarkClient(RmsClient client) {
 
@@ -388,6 +391,14 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 		return call(getClient().getServerAddress(), CHANGE_LOG_PATH, HttpMethod.POST, request,
 				new BeanResponseHandler<>(getClient().getMapper(), ChangeLogResponse.class, getErrorHandler()))
+				.getBean();
+	}
+
+	@Override
+	public AccessLogResponse accessLog(AccessLogRequest request) {
+
+		return call(getClient().getServerAddress(), ACCESS_LOG_PATH, HttpMethod.POST, request,
+				new BeanResponseHandler<>(getClient().getMapper(), AccessLogResponse.class, getErrorHandler()))
 				.getBean();
 	}
 
