@@ -17,6 +17,7 @@ import com.documaster.rms.noark.ws.client.codelist.CodeList;
 import com.documaster.rms.noark.ws.client.codelist.CodeValue;
 import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextRequest;
 import com.documaster.rms.noark.ws.client.fulltextsearch.FullTextResponse;
+import com.documaster.rms.noark.ws.client.info.MyInfoResponse;
 import com.documaster.rms.noark.ws.client.query.Query;
 import com.documaster.rms.noark.ws.client.transaction.Transaction;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentfil;
@@ -73,4 +74,6 @@ public interface NoarkRmsClient {
 	ChangeLogResponse changeLog(ChangeLogRequest request);
 
 	AccessLogResponse accessLog(AccessLogRequest request);
+
+	MyInfoResponse myInfo();
 }
