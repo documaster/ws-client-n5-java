@@ -32,6 +32,7 @@ import com.documaster.rms.noark.ws.client.handlers.BeanResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.ErrorResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.OutputStreamResponseHandler;
 import com.documaster.rms.noark.ws.client.handlers.VoidResponseHandler;
+import com.documaster.rms.noark.ws.client.info.MyInfoResponse;
 import com.documaster.rms.noark.ws.client.query.Query;
 import com.documaster.rms.noark.ws.client.transaction.Transaction;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentfil;
@@ -72,6 +73,9 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 	public static final String CHANGE_LOG_PATH = NOARK_SERVICE_PATH + "/logs/change-log";
 	public static final String ACCESS_LOG_PATH = NOARK_SERVICE_PATH + "/logs/access-log";
+
+	public static final String INFO_PATH = NOARK_SERVICE_PATH + "/info";
+	public static final String ME_PATH = INFO_PATH + "/me";
 
 	public NoarkClient(RmsClient client) {
 
@@ -399,6 +403,14 @@ public class NoarkClient extends HttpService<RmsClient> implements NoarkRmsClien
 
 		return call(getClient().getServerAddress(), ACCESS_LOG_PATH, HttpMethod.POST, request,
 				new BeanResponseHandler<>(getClient().getMapper(), AccessLogResponse.class, getErrorHandler()))
+				.getBean();
+	}
+
+	@Override
+	public MyInfoResponse myInfo() {
+
+		return call(getClient().getServerAddress(), ME_PATH, HttpMethod.GET,
+				new BeanResponseHandler<>(getClient().getMapper(), MyInfoResponse.class, getErrorHandler()))
 				.getBean();
 	}
 
