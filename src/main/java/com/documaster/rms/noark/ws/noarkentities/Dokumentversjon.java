@@ -28,7 +28,6 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	@JsonIgnore
 	public Long filstoerrelse;
 
-	@JsonIgnore
 	private String filnavn;
 
 	@JsonIgnore
@@ -107,6 +106,11 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	public String getFilnavn() {
 
 		return filnavn;
+	}
+
+	public void setFilnavn(String filnavn) {
+
+		this.filnavn = filnavn;
 	}
 
 	public String getInnholdstype() {
