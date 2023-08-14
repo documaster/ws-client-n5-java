@@ -1,11 +1,13 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
-import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,11 +27,14 @@ public class Klasse extends DisposableFinalizedEntityBase<Klasse> {
 	private String klasseIdent;
 	private String tittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Skjerming skjerming;
+
+	private boolean serializeSkjerming;
 
 	public Klasse(String klasseIdent, String tittel) {
 
@@ -71,9 +76,22 @@ public class Klasse extends DisposableFinalizedEntityBase<Klasse> {
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
@@ -91,9 +109,22 @@ public class Klasse extends DisposableFinalizedEntityBase<Klasse> {
 		return skjerming;
 	}
 
+	@JsonProperty("skjerming")
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+		serializeSkjerming = true;
+	}
+
+	@JsonProperty("skjerming")
+	public Optional<Skjerming> getSkjermingAsOptional() {
+
+		if (serializeSkjerming) {
+
+			return Optional.ofNullable(skjerming);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Klasse> linkKlassifikasjonssystem(String ksId) {

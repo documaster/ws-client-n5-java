@@ -12,10 +12,12 @@ import com.documaster.rms.noark.ws.client.codelist.CodeValue;
 import com.documaster.rms.noark.ws.constants.AdministrativEnhet;
 import com.documaster.rms.noark.ws.constants.Arkivdelstatus;
 import com.documaster.rms.noark.ws.constants.Arkivstatus;
+import com.documaster.rms.noark.ws.constants.Avskrivningsmaate;
 import com.documaster.rms.noark.ws.constants.Dokumentmedium;
 import com.documaster.rms.noark.ws.constants.Dokumentstatus;
 import com.documaster.rms.noark.ws.constants.Dokumenttype;
 import com.documaster.rms.noark.ws.constants.Ekspederingskanal;
+import com.documaster.rms.noark.ws.constants.FlytStatus;
 import com.documaster.rms.noark.ws.constants.Journalposttype;
 import com.documaster.rms.noark.ws.constants.Journalstatus;
 import com.documaster.rms.noark.ws.constants.Kassasjonshjemmel;
@@ -29,6 +31,9 @@ import com.documaster.rms.noark.ws.constants.Moeteregistreringstype;
 import com.documaster.rms.noark.ws.constants.Moetesakstype;
 import com.documaster.rms.noark.ws.constants.Planstatus;
 import com.documaster.rms.noark.ws.constants.Plantype;
+import com.documaster.rms.noark.ws.constants.PresedensHjemmel;
+import com.documaster.rms.noark.ws.constants.PresedensStatus;
+import com.documaster.rms.noark.ws.constants.Rettskildefaktor;
 import com.documaster.rms.noark.ws.constants.Saksstatus;
 import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.constants.TilknyttetRegistreringSom;
@@ -36,13 +41,18 @@ import com.documaster.rms.noark.ws.constants.Variantformat;
 import com.documaster.rms.noark.ws.noarkentities.Adresse;
 import com.documaster.rms.noark.ws.noarkentities.Arkiv;
 import com.documaster.rms.noark.ws.noarkentities.Arkivdel;
+import com.documaster.rms.noark.ws.noarkentities.Arkivnotat;
 import com.documaster.rms.noark.ws.noarkentities.Arkivskaper;
+import com.documaster.rms.noark.ws.noarkentities.Avskrivning;
 import com.documaster.rms.noark.ws.noarkentities.Basisregistrering;
 import com.documaster.rms.noark.ws.noarkentities.Bygning;
+import com.documaster.rms.noark.ws.noarkentities.DNummer;
 import com.documaster.rms.noark.ws.noarkentities.Dokument;
+import com.documaster.rms.noark.ws.noarkentities.Dokumentflyt;
 import com.documaster.rms.noark.ws.noarkentities.Dokumentversjon;
 import com.documaster.rms.noark.ws.noarkentities.Eiendom;
 import com.documaster.rms.noark.ws.noarkentities.EksternId;
+import com.documaster.rms.noark.ws.noarkentities.Foedselsnummer;
 import com.documaster.rms.noark.ws.noarkentities.Journalpost;
 import com.documaster.rms.noark.ws.noarkentities.Klasse;
 import com.documaster.rms.noark.ws.noarkentities.Klassifikasjonssystem;
@@ -55,6 +65,8 @@ import com.documaster.rms.noark.ws.noarkentities.Moeteregistrering;
 import com.documaster.rms.noark.ws.noarkentities.NoarkEntity;
 import com.documaster.rms.noark.ws.noarkentities.Noekkelord;
 import com.documaster.rms.noark.ws.noarkentities.Plan;
+import com.documaster.rms.noark.ws.noarkentities.Posisjon;
+import com.documaster.rms.noark.ws.noarkentities.Presedens;
 import com.documaster.rms.noark.ws.noarkentities.Saksmappe;
 import com.documaster.rms.noark.ws.noarkentities.Sakspart;
 
@@ -79,9 +91,12 @@ public enum NoarkObjectMappings {
 
 		putTypeMapping(typeMappings, Arkiv.class);
 		putTypeMapping(typeMappings, Arkivdel.class);
+		putTypeMapping(typeMappings, Arkivnotat.class);
 		putTypeMapping(typeMappings, Arkivskaper.class);
+		putTypeMapping(typeMappings, Avskrivning.class);
 		putTypeMapping(typeMappings, Basisregistrering.class);
 		putTypeMapping(typeMappings, Dokument.class);
+		putTypeMapping(typeMappings, Dokumentflyt.class);
 		putTypeMapping(typeMappings, Dokumentversjon.class);
 		putTypeMapping(typeMappings, EksternId.class);
 		putTypeMapping(typeMappings, Journalpost.class);
@@ -98,8 +113,12 @@ public enum NoarkObjectMappings {
 		putTypeMapping(typeMappings, Merknad.class);
 		putTypeMapping(typeMappings, Adresse.class);
 		putTypeMapping(typeMappings, Bygning.class);
+		putTypeMapping(typeMappings, Posisjon.class);
 		putTypeMapping(typeMappings, Eiendom.class);
 		putTypeMapping(typeMappings, Plan.class);
+		putTypeMapping(typeMappings, DNummer.class);
+		putTypeMapping(typeMappings, Foedselsnummer.class);
+		putTypeMapping(typeMappings, Presedens.class);
 
 		return Collections.unmodifiableMap(typeMappings);
 	}
@@ -117,10 +136,12 @@ public enum NoarkObjectMappings {
 		putCodeValueMapping(codeValueMappings, AdministrativEnhet.class);
 		putCodeValueMapping(codeValueMappings, Arkivdelstatus.class);
 		putCodeValueMapping(codeValueMappings, Arkivstatus.class);
+		putCodeValueMapping(codeValueMappings, Avskrivningsmaate.class);
 		putCodeValueMapping(codeValueMappings, Dokumentmedium.class);
 		putCodeValueMapping(codeValueMappings, Dokumentstatus.class);
 		putCodeValueMapping(codeValueMappings, Dokumenttype.class);
 		putCodeValueMapping(codeValueMappings, Ekspederingskanal.class);
+		putCodeValueMapping(codeValueMappings, FlytStatus.class);
 		putCodeValueMapping(codeValueMappings, Journalposttype.class);
 		putCodeValueMapping(codeValueMappings, Journalstatus.class);
 		putCodeValueMapping(codeValueMappings, Korrespondanseparttype.class);
@@ -138,6 +159,9 @@ public enum NoarkObjectMappings {
 		putCodeValueMapping(codeValueMappings, Lovreferanse.class);
 		putCodeValueMapping(codeValueMappings, Kassasjonshjemmel.class);
 		putCodeValueMapping(codeValueMappings, Kassasjonsvedtak.class);
+		putCodeValueMapping(codeValueMappings, PresedensHjemmel.class);
+		putCodeValueMapping(codeValueMappings, PresedensStatus.class);
+		putCodeValueMapping(codeValueMappings, Rettskildefaktor.class);
 
 		return Collections.unmodifiableMap(codeValueMappings);
 	}

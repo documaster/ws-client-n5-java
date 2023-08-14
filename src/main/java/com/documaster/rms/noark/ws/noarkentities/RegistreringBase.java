@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
@@ -10,6 +11,7 @@ import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
+import com.documaster.rms.noark.ws.serialization.NoarkOptionalEnumJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,6 +33,8 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public static final String NOEKKELORD_LINK = "refNoekkelord";
 	public static final String MERKNAD_LINK = "refMerknad";
 	public static final String NASJONAL_IDENTIFIKATOR_LINK = "refNasjonalIdentifikator";
+	public static final String POSISJON_LINK = "refPosisjon";
+	public static final String PERSON_IDENTIFIKATOR_LINK = "refPersonIdentifikator";
 	public static final String KRYSSREFERANSE_TIL_MAPPE_LINK = "refKryssreferanseTilMappe";
 	public static final String KRYSSREFERANSE_FRA_MAPPE_LINK = "refKryssreferanseFraMappe";
 	public static final String KRYSSREFERANSE_TIL_REGISTRERING_LINK = "refKryssreferanseTilRegistrering";
@@ -39,26 +43,42 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	private String registreringsIdent;
 	private String tittel;
 	private String offentligTittel;
+	private boolean serializeOffentligTittel;
 	private String beskrivelse;
+	private boolean serializeBeskrivelse;
 	private String forfatter;
+	private boolean serializeForfatter;
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date registreringsDato;
+	private boolean serializeRegistreringsDato;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date dokumentetsDato;
+	private boolean serializeDokumentetsDato;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date forfallsdato;
+	private boolean serializeForfallsdato;
+	private Date mottattDato;
+	private boolean serializeMottattDato;
+	private Date sendtDato;
+	private boolean serializeSendtDato;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
+	private Date offentlighetsvurdertDato;
+	private boolean serializeOffentlighetsvurdertDato;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Dokumentmedium dokumentmedium;
 
-	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
+	@JsonSerialize(using = NoarkOptionalEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Skjerming skjerming;
+
+	private boolean serializeSkjerming;
 
 	protected RegistreringBase() {
 
@@ -98,9 +118,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return offentligTittel;
 	}
 
+	@JsonProperty("offentligTittel")
 	public void setOffentligTittel(String offentligTittel) {
 
 		this.offentligTittel = offentligTittel;
+		serializeOffentligTittel = true;
+	}
+
+	@JsonProperty("offentligTittel")
+	public Optional<String> getOffentligTittelAsOptional() {
+
+		if (serializeOffentligTittel) {
+
+			return Optional.ofNullable(offentligTittel);
+		}
+
+		return null;
 	}
 
 	public String getBeskrivelse() {
@@ -108,9 +141,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return beskrivelse;
 	}
 
+	@JsonProperty("beskrivelse")
 	public void setBeskrivelse(String beskrivelse) {
 
 		this.beskrivelse = beskrivelse;
+		serializeBeskrivelse = true;
+	}
+
+	@JsonProperty("beskrivelse")
+	public Optional<String> getBeskrivelseAsOptional() {
+
+		if (serializeBeskrivelse) {
+
+			return Optional.ofNullable(beskrivelse);
+		}
+
+		return null;
 	}
 
 	public String getForfatter() {
@@ -118,9 +164,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return forfatter;
 	}
 
+	@JsonProperty("forfatter")
 	public void setForfatter(String forfatter) {
 
 		this.forfatter = forfatter;
+		serializeForfatter = true;
+	}
+
+	@JsonProperty("forfatter")
+	public Optional<String> getForfatterAsOptional() {
+
+		if (serializeForfatter) {
+
+			return Optional.ofNullable(forfatter);
+		}
+
+		return null;
 	}
 
 	public BsmGroupsMap getVirksomhetsspesifikkeMetadata() {
@@ -139,9 +198,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return registreringsDato;
 	}
 
+	@JsonProperty("registreringsDato")
 	public void setRegistreringsDato(Date registreringsDato) {
 
 		this.registreringsDato = registreringsDato;
+		serializeRegistreringsDato = true;
+	}
+
+	@JsonProperty("registreringsDato")
+	public Optional<Date> getRegistreringsDatoAsOptional() {
+
+		if (serializeRegistreringsDato) {
+
+			return Optional.ofNullable(registreringsDato);
+		}
+
+		return null;
 	}
 
 	public Date getDokumentetsDato() {
@@ -149,9 +221,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return dokumentetsDato;
 	}
 
+	@JsonProperty("dokumentetsDato")
 	public void setDokumentetsDato(Date dokumentetsDato) {
 
 		this.dokumentetsDato = dokumentetsDato;
+		serializeDokumentetsDato = true;
+	}
+
+	@JsonProperty("dokumentetsDato")
+	public Optional<Date> getDokumentetsDatoAsOptional() {
+
+		if (serializeDokumentetsDato) {
+
+			return Optional.ofNullable(dokumentetsDato);
+		}
+
+		return null;
 	}
 
 	public Date getForfallsdato() {
@@ -159,9 +244,91 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return forfallsdato;
 	}
 
+	@JsonProperty("forfallsdato")
 	public void setForfallsdato(Date forfallsdato) {
 
 		this.forfallsdato = forfallsdato;
+		serializeForfallsdato = true;
+	}
+
+	@JsonProperty("forfallsdato")
+	public Optional<Date> getForfallsdatoAsOptional() {
+
+		if (serializeForfallsdato) {
+
+			return Optional.ofNullable(forfallsdato);
+		}
+
+		return null;
+	}
+
+	public Date getMottattDato() {
+
+		return mottattDato;
+	}
+
+	@JsonProperty("mottattDato")
+	public void setMottattDato(Date mottattDato) {
+
+		this.mottattDato = mottattDato;
+		serializeMottattDato = true;
+	}
+
+	@JsonProperty("mottattDato")
+	public Optional<Date> getMottattDatoAsOptional() {
+
+		if (serializeMottattDato) {
+
+			return Optional.ofNullable(mottattDato);
+		}
+
+		return null;
+	}
+
+	public Date getSendtDato() {
+
+		return sendtDato;
+	}
+
+	@JsonProperty("sendtDato")
+	public void setSendtDato(Date sendtDato) {
+
+		this.sendtDato = sendtDato;
+		serializeSendtDato = true;
+	}
+
+	@JsonProperty("sendtDato")
+	public Optional<Date> getSendtDatoAsOptional() {
+
+		if (serializeSendtDato) {
+
+			return Optional.ofNullable(sendtDato);
+		}
+
+		return null;
+	}
+
+	public Date getOffentlighetsvurdertDato() {
+
+		return offentlighetsvurdertDato;
+	}
+
+	@JsonProperty("offentlighetsvurdertDato")
+	public void setOffentlighetsvurdertDato(Date offentlighetsvurdertDato) {
+
+		this.offentlighetsvurdertDato = offentlighetsvurdertDato;
+		serializeOffentlighetsvurdertDato = true;
+	}
+
+	@JsonProperty("offentlighetsvurdertDato")
+	public Optional<Date> getOffentlighetsvurdertDatoAsOptional() {
+
+		if (serializeOffentlighetsvurdertDato) {
+
+			return Optional.ofNullable(offentlighetsvurdertDato);
+		}
+
+		return null;
 	}
 
 	public Dokumentmedium getDokumentmedium() {
@@ -179,9 +346,22 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return skjerming;
 	}
 
+	@JsonProperty("skjerming")
 	public void setSkjerming(Skjerming skjerming) {
 
 		this.skjerming = skjerming;
+		serializeSkjerming = true;
+	}
+
+	@JsonProperty("skjerming")
+	public Optional<Skjerming> getSkjermingAsOptional() {
+
+		if (serializeSkjerming) {
+
+			return Optional.ofNullable(skjerming);
+		}
+
+		return null;
 	}
 
 	public LinkAction<TEntity> linkDokument(String... dokumentIds) {
@@ -314,6 +494,26 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return link(NASJONAL_IDENTIFIKATOR_LINK, nasjonalIdentifikator);
 	}
 
+	public LinkAction<TEntity> linkPosisjon(String... posisjonIds) {
+
+		return link(POSISJON_LINK, posisjonIds);
+	}
+
+	public LinkAction<TEntity> linkPosisjon(Posisjon... posisjon) {
+
+		return link(POSISJON_LINK, posisjon);
+	}
+
+	public LinkAction<TEntity> linkPersonIdentifikator(String... personIdentifikator) {
+
+		return link(PERSON_IDENTIFIKATOR_LINK, personIdentifikator);
+	}
+
+	public LinkAction<TEntity> linkPersonIdentifikator(PersonIdentifikator<?>... personIdentifikator) {
+
+		return link(PERSON_IDENTIFIKATOR_LINK, personIdentifikator);
+	}
+
 	public LinkAction<TEntity> linkMappe(String mappeId) {
 
 		return link(MAPPE_LINK, mappeId);
@@ -344,6 +544,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return link(KRYSSREFERANSE_TIL_MAPPE_LINK, mappe);
 	}
 
+	public UnlinkAction<TEntity> removeKryssreferanseTilMappe(String... mappeIds) {
+
+		return unlink(KRYSSREFERANSE_TIL_MAPPE_LINK, mappeIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseTilMappe(AbstraktMappe... mappe) {
+
+		return unlink(KRYSSREFERANSE_TIL_MAPPE_LINK, mappe);
+	}
+
 	public LinkAction<TEntity> addKryssreferanseFraMappe(String... mappeIds) {
 
 		return link(KRYSSREFERANSE_FRA_MAPPE_LINK, mappeIds);
@@ -352,6 +562,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public LinkAction<TEntity> addKryssreferanseFraMappe(AbstraktMappe... mappe) {
 
 		return link(KRYSSREFERANSE_FRA_MAPPE_LINK, mappe);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraMappe(String... mappeIds) {
+
+		return unlink(KRYSSREFERANSE_FRA_MAPPE_LINK, mappeIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraMappe(AbstraktMappe... mappe) {
+
+		return unlink(KRYSSREFERANSE_FRA_MAPPE_LINK, mappe);
 	}
 
 	public LinkAction<TEntity> addKryssreferanseTilRegistrering(String... registreringIds) {
@@ -364,6 +584,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		return link(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registrering);
 	}
 
+	public UnlinkAction<TEntity> removeKryssreferanseTilRegistrering(String... registreringIds) {
+
+		return unlink(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registreringIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseTilRegistrering(AbstraktRegistrering... registrering) {
+
+		return unlink(KRYSSREFERANSE_TIL_REGISTRERING_LINK, registrering);
+	}
+
 	public LinkAction<TEntity> addKryssreferanseFraRegistrering(String... registreringIds) {
 
 		return link(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registreringIds);
@@ -372,6 +602,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	public LinkAction<TEntity> addKryssreferanseFraRegistrering(AbstraktRegistrering... registrering) {
 
 		return link(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registrering);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraRegistrering(String... registreringIds) {
+
+		return unlink(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registreringIds);
+	}
+
+	public UnlinkAction<TEntity> removeKryssreferanseFraRegistrering(AbstraktRegistrering... registrering) {
+
+		return unlink(KRYSSREFERANSE_FRA_REGISTRERING_LINK, registrering);
 	}
 
 	@JsonIgnore

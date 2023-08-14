@@ -1,14 +1,15 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.AdministrativEnhet;
 import com.documaster.rms.noark.ws.constants.Saksstatus;
+import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonSerializer;
-import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Saksmappe extends MappeBase<Saksmappe> {
 
 	public static final String SAKSPART_LINK = "refSakspart";
+	public static final String PRESEDENS_LINK = "refPresedens";
 
 	private Integer saksaar;
 	private Integer sakssekvensnummer;
@@ -36,6 +38,7 @@ public class Saksmappe extends MappeBase<Saksmappe> {
 	private Saksstatus saksstatus;
 
 	private String prefiks;
+	private boolean serializePrefiks;
 
 	public Saksmappe(String tittel, AdministrativEnhet administrativEnhet) {
 
@@ -127,9 +130,22 @@ public class Saksmappe extends MappeBase<Saksmappe> {
 		return prefiks;
 	}
 
+	@JsonProperty("prefiks")
 	public void setPrefiks(String prefiks) {
 
 		this.prefiks = prefiks;
+		serializePrefiks = true;
+	}
+
+	@JsonProperty("prefiks")
+	public Optional<String> getPrefiksAsOptional() {
+
+		if (serializePrefiks) {
+
+			return Optional.ofNullable(prefiks);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Saksmappe> linkRegistrering(String... registreringIds) {
@@ -160,5 +176,25 @@ public class Saksmappe extends MappeBase<Saksmappe> {
 	public LinkAction<Saksmappe> linkSakspart(Sakspart... sakspart) {
 
 		return link(SAKSPART_LINK, sakspart);
+	}
+
+	public LinkAction<Saksmappe> linkPresedens(String... presedensIds) {
+
+		return link(PRESEDENS_LINK, presedensIds);
+	}
+
+	public LinkAction<Saksmappe> linkPresedens(Presedens... presedens) {
+
+		return link(PRESEDENS_LINK, presedens);
+	}
+
+	public UnlinkAction<Saksmappe> unlinkPresedens(String... presedensIds) {
+
+		return unlink(PRESEDENS_LINK, presedensIds);
+	}
+
+	public UnlinkAction<Saksmappe> unlinkPresedens(Presedens... presedens) {
+
+		return unlink(PRESEDENS_LINK, presedens);
 	}
 }

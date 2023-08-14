@@ -1,6 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
 import java.util.Date;
+import java.util.Optional;
 
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
@@ -16,6 +17,7 @@ public class Moetemappe extends MappeBase<Moetemappe> {
 	private String moetenummer;
 	private String utvalg;
 	private String moetested;
+	private boolean serializeMoetested;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date moetedato;
@@ -63,9 +65,22 @@ public class Moetemappe extends MappeBase<Moetemappe> {
 		return moetested;
 	}
 
+	@JsonProperty("moetested")
 	public void setMoetested(String moetested) {
 
 		this.moetested = moetested;
+		serializeMoetested = true;
+	}
+
+	@JsonProperty("moetested")
+	public Optional<String> getMoetestedAsOptional() {
+
+		if (serializeMoetested) {
+
+			return Optional.ofNullable(moetested);
+		}
+
+		return null;
 	}
 
 	public Date getMoetedato() {

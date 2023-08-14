@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.constants.Variantformat;
 import com.documaster.rms.noark.ws.serialization.NoarkEnumJsonDeserializer;
@@ -26,15 +28,16 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 	@JsonIgnore
 	public Long filstoerrelse;
 
-	@JsonIgnore
 	private String filnavn;
 
 	@JsonIgnore
 	private String innholdstype;
 
 	public Integer versjonsnummer;
+	private boolean serializeVersjonsnummer;
 	public String format;
 	public String formatDetaljer;
+	private boolean serializeFormatDetaljer;
 	public Boolean kryptertDokument;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
@@ -70,6 +73,7 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 		this.innholdstype = innholdstype;
 	}
 
+	@JsonIgnore
 	public Dokumentfil getDokumentfil() {
 
 		return dokumentfil;
@@ -85,16 +89,19 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 		return dokumentfil != null ? dokumentfil.getId() : null;
 	}
 
+	@JsonIgnore
 	public String getSjekksum() {
 
 		return sjekksum;
 	}
 
+	@JsonIgnore
 	public String getSjekksumAlgoritme() {
 
 		return sjekksumAlgoritme;
 	}
 
+	@JsonIgnore
 	public Long getFilstoerrelse() {
 
 		return filstoerrelse;
@@ -105,6 +112,12 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 		return filnavn;
 	}
 
+	public void setFilnavn(String filnavn) {
+
+		this.filnavn = filnavn;
+	}
+
+	@JsonIgnore
 	public String getInnholdstype() {
 
 		return innholdstype;
@@ -125,9 +138,22 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 		return versjonsnummer;
 	}
 
+	@JsonProperty("versjonsnummer")
 	public void setVersjonsnummer(Integer versjonsnummer) {
 
 		this.versjonsnummer = versjonsnummer;
+		serializeVersjonsnummer = true;
+	}
+
+	@JsonProperty("versjonsnummer")
+	public Optional<Integer> getVersjonsnummerAsOptional() {
+
+		if (serializeVersjonsnummer) {
+
+			return Optional.ofNullable(versjonsnummer);
+		}
+
+		return null;
 	}
 
 	public String getFormat() {
@@ -145,9 +171,22 @@ public class Dokumentversjon extends NoarkEntityBase<Dokumentversjon> {
 		return formatDetaljer;
 	}
 
+	@JsonProperty("formatDetaljer")
 	public void setFormatDetaljer(String formatDetaljer) {
 
 		this.formatDetaljer = formatDetaljer;
+		serializeFormatDetaljer = true;
+	}
+
+	@JsonProperty("formatDetaljer")
+	public Optional<String> getFormatDetaljerAsOptional() {
+
+		if (serializeFormatDetaljer) {
+
+			return Optional.ofNullable(formatDetaljer);
+		}
+
+		return null;
 	}
 
 	public Boolean getKryptertDokument() {

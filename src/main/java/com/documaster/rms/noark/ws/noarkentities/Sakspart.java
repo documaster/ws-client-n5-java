@@ -1,5 +1,7 @@
 package com.documaster.rms.noark.ws.noarkentities;
 
+import java.util.Optional;
+
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +14,7 @@ public class Sakspart extends PartBase<Sakspart> {
 	private String sakspartNavn;
 	private String sakspartRolle;
 	private String sakspartIdent;
+	private boolean serializeSakspartIdent;
 
 	public Sakspart(String sakspartNavn, String sakspartRolle) {
 
@@ -53,9 +56,22 @@ public class Sakspart extends PartBase<Sakspart> {
 		return sakspartIdent;
 	}
 
+	@JsonProperty("sakspartIdent")
 	public void setSakspartIdent(String sakspartIdent) {
 
 		this.sakspartIdent = sakspartIdent;
+		serializeSakspartIdent = true;
+	}
+
+	@JsonProperty("sakspartIdent")
+	public Optional<String> getSakspartIdentAsOptional() {
+
+		if (serializeSakspartIdent) {
+
+			return Optional.ofNullable(sakspartIdent);
+		}
+
+		return null;
 	}
 
 	public LinkAction<Sakspart> linkMappe(String mappeId) {

@@ -3,6 +3,7 @@ package com.documaster.rms.noark.ws.noarkentities;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.documaster.rms.noark.ws.Argument;
@@ -19,8 +20,11 @@ public abstract class NoarkEntityBase<TEntity extends NoarkEntityBase<TEntity>> 
 	private final String version;
 
 	private Date opprettetDato;
+	private boolean serializeOpprettetDato;
 	private String opprettetAv;
+	private boolean serializeOpprettetAv;
 	private String opprettetAvBrukerIdent;
+	private boolean serializeOpprettetAvBrukerIdent;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Map<String, String> links;
@@ -64,9 +68,22 @@ public abstract class NoarkEntityBase<TEntity extends NoarkEntityBase<TEntity>> 
 		return opprettetDato;
 	}
 
+	@JsonProperty("opprettetDato")
 	public void setOpprettetDato(Date opprettetDato) {
 
 		this.opprettetDato = opprettetDato;
+		serializeOpprettetDato = true;
+	}
+
+	@JsonProperty("opprettetDato")
+	public Optional<Date> getOpprettetDatoAsOptional() {
+
+		if (serializeOpprettetDato) {
+
+			return Optional.ofNullable(opprettetDato);
+		}
+
+		return null;
 	}
 
 	public String getOpprettetAv() {
@@ -74,9 +91,22 @@ public abstract class NoarkEntityBase<TEntity extends NoarkEntityBase<TEntity>> 
 		return opprettetAv;
 	}
 
+	@JsonProperty("opprettetAv")
 	public void setOpprettetAv(String opprettetAv) {
 
 		this.opprettetAv = opprettetAv;
+		serializeOpprettetAv = true;
+	}
+
+	@JsonProperty("opprettetAv")
+	public Optional<String> getOpprettetAvAsOptional() {
+
+		if (serializeOpprettetAv) {
+
+			return Optional.ofNullable(opprettetAv);
+		}
+
+		return null;
 	}
 
 	public String getOpprettetAvBrukerIdent() {
@@ -84,9 +114,22 @@ public abstract class NoarkEntityBase<TEntity extends NoarkEntityBase<TEntity>> 
 		return opprettetAvBrukerIdent;
 	}
 
+	@JsonProperty("opprettetAvBrukerIdent")
 	public void setOpprettetAvBrukerIdent(String opprettetAvBrukerIdent) {
 
 		this.opprettetAvBrukerIdent = opprettetAvBrukerIdent;
+		serializeOpprettetAvBrukerIdent = true;
+	}
+
+	@JsonProperty("opprettetAvBrukerIdent")
+	public Optional<String> getOpprettetAvBrukerIdentAsOptional() {
+
+		if (serializeOpprettetAvBrukerIdent) {
+
+			return Optional.ofNullable(opprettetAvBrukerIdent);
+		}
+
+		return null;
 	}
 
 	protected String getRef(String refName) {
