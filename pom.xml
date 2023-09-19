@@ -41,9 +41,9 @@
 		<version.commons.io>2.7</version.commons.io>
 		<version.commons.codec>1.11</version.commons.codec>
 		<version.jackson.databind>2.12.7.1</version.jackson.databind>
-		<version.jackson.annotations>2.9.10</version.jackson.annotations>
-		<version.jackson.core>2.9.10</version.jackson.core>
-		<version.jackson.datatype>2.9.10</version.jackson.datatype>
+		<version.jackson.annotations>2.12.7</version.jackson.annotations>
+		<version.jackson.core>2.12.7</version.jackson.core>
+		<version.jackson.datatype>2.12.7</version.jackson.datatype>
 		<version.source.plugin>3.1.0</version.source.plugin>
 		<version.javadoc.plugin>3.1.0</version.javadoc.plugin>
 	</properties>
