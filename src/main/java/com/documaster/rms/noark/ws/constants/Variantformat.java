@@ -7,6 +7,7 @@ public class Variantformat extends NoarkEnum {
 
 	public static final Variantformat PRODUKSJONSFORMAT = new Variantformat("P", "Produksjonsformat");
 	public static final Variantformat ARKIVFORMAT = new Variantformat("A", "Arkivformat");
+	public static final Variantformat OFFENTLIG = new Variantformat("O", "Offentlig");
 
 	public Variantformat(String code) {
 
