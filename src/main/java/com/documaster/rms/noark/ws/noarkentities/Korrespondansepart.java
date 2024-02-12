@@ -23,6 +23,8 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	private String saksbehandler;
 	private boolean serializeSaksbehandler;
 
+	private Boolean erPerson;
+
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
 	private Korrespondanseparttype korrespondanseparttype;
@@ -118,6 +120,16 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 		}
 
 		return null;
+	}
+
+	public Boolean getErPerson() {
+
+		return erPerson;
+	}
+
+	public void setErPerson(Boolean erPerson) {
+
+		this.erPerson = erPerson;
 	}
 
 	public Ekspederingskanal getEkspederingskanal() {
