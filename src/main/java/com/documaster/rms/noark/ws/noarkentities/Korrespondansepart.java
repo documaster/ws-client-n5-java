@@ -24,6 +24,7 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	private boolean serializeSaksbehandler;
 
 	private Boolean erPerson;
+	private Boolean skjermEInnsyn;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -130,6 +131,16 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	public void setErPerson(Boolean erPerson) {
 
 		this.erPerson = erPerson;
+	}
+
+	public Boolean getSkjermEInnsyn() {
+
+		return skjermEInnsyn;
+	}
+
+	public void setSkjermEInnsyn(Boolean skjermEInnsyn) {
+
+		this.skjermEInnsyn = skjermEInnsyn;
 	}
 
 	public Ekspederingskanal getEkspederingskanal() {
