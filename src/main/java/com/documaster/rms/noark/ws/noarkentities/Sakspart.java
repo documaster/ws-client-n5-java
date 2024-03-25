@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Sakspart extends PartBase<Sakspart> {
 
 	public static final String MAPPE_LINK = "refMappe";
+	public static final String EKSTERN_ID_LINK = "refEksternId";
 
 	private String sakspartNavn;
 	private String sakspartRolle;
@@ -82,6 +83,16 @@ public class Sakspart extends PartBase<Sakspart> {
 	public LinkAction<Sakspart> linkMappe(Saksmappe mappe) {
 
 		return link(MAPPE_LINK, mappe);
+	}
+
+	public LinkAction<Sakspart> linkEksternId(String... eksternIdIds) {
+
+		return link(EKSTERN_ID_LINK, eksternIdIds);
+	}
+
+	public LinkAction<Sakspart> linkEksternId(EksternId... eksternId) {
+
+		return link(EKSTERN_ID_LINK, eksternId);
 	}
 
 	@JsonIgnore

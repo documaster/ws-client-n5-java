@@ -15,6 +15,7 @@ public class Merknad extends NoarkEntityBase<Merknad> {
 	public static final String MAPPE_LINK = "refMappe";
 	public static final String REGISTRERING_LINK = "refRegistrering";
 	public static final String DOKUMENT_LINK = "refDokument";
+	public static final String EKSTERN_ID_LINK = "refEksternId";
 
 	private String tekst;
 
@@ -85,6 +86,16 @@ public class Merknad extends NoarkEntityBase<Merknad> {
 	public LinkAction<Merknad> linkDokument(Dokument dokument) {
 
 		return link(DOKUMENT_LINK, dokument);
+	}
+
+	public LinkAction<Merknad> linkEksternId(String... eksternIdIds) {
+
+		return link(EKSTERN_ID_LINK, eksternIdIds);
+	}
+
+	public LinkAction<Merknad> linkEksternId(EksternId... eksternId) {
+
+		return link(EKSTERN_ID_LINK, eksternId);
 	}
 
 	@JsonIgnore

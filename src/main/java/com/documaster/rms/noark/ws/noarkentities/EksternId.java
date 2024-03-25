@@ -9,7 +9,10 @@ public class EksternId extends NoarkEntityBase<EksternId> {
 
 	public static final String MAPPE_LINK = "refMappe";
 	public static final String REGISTRERING_LINK = "refRegistrering";
+	public static final String SAKSPART_LINK = "refSakspart";
+	public static final String KORRESPONDANSEPART_LINK = "refKorrespondansepart";
 	public static final String DOKUMENT_LINK = "refDokument";
+	public static final String MERKNAD_LINK = "refMerknad";
 
 	private String eksterntSystem;
 	private String eksternID;
@@ -69,6 +72,26 @@ public class EksternId extends NoarkEntityBase<EksternId> {
 		return link(REGISTRERING_LINK, registrering);
 	}
 
+	public LinkAction<EksternId> linkSakspart(String sakspartId) {
+
+		return link(SAKSPART_LINK, sakspartId);
+	}
+
+	public LinkAction<EksternId> linkSakspart(Sakspart sakspart) {
+
+		return link(SAKSPART_LINK, sakspart);
+	}
+
+	public LinkAction<EksternId> linkKorrespondansepart(String korrespondansepartId) {
+
+		return link(KORRESPONDANSEPART_LINK, korrespondansepartId);
+	}
+
+	public LinkAction<EksternId> linkKorrespondansepart(Korrespondansepart korrespondansepart) {
+
+		return link(KORRESPONDANSEPART_LINK, korrespondansepart);
+	}
+
 	public LinkAction<EksternId> linkDokument(String dokumentId) {
 
 		return link(DOKUMENT_LINK, dokumentId);
@@ -77,6 +100,16 @@ public class EksternId extends NoarkEntityBase<EksternId> {
 	public LinkAction<EksternId> linkDokument(Dokument dokument) {
 
 		return link(DOKUMENT_LINK, dokument);
+	}
+
+	public LinkAction<EksternId> linkMerknad(String merknadId) {
+
+		return link(MERKNAD_LINK, merknadId);
+	}
+
+	public LinkAction<EksternId> linkMerknad(Merknad merknad) {
+
+		return link(MERKNAD_LINK, merknad);
 	}
 
 	@JsonIgnore
