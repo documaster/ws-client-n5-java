@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Korrespondansepart extends PartBase<Korrespondansepart> {
 
 	public static final String REGISTRERING_LINK = "refRegistrering";
+	public static final String EKSTERN_ID_LINK = "refEksternId";
 
 	private String korrespondansepartNavn;
 	private String saksbehandler;
@@ -174,6 +175,16 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	public LinkAction<Korrespondansepart> linkRegistrering(AbstraktRegistrering registrering) {
 
 		return link(REGISTRERING_LINK, registrering);
+	}
+
+	public LinkAction<Korrespondansepart> linkEksternId(String... eksternIdIds) {
+
+		return link(EKSTERN_ID_LINK, eksternIdIds);
+	}
+
+	public LinkAction<Korrespondansepart> linkEksternId(EksternId... eksternId) {
+
+		return link(EKSTERN_ID_LINK, eksternId);
 	}
 
 	@JsonIgnore
