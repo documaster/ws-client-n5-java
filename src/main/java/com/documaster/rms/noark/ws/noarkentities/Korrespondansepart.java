@@ -18,12 +18,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Korrespondansepart extends PartBase<Korrespondansepart> {
 
 	public static final String REGISTRERING_LINK = "refRegistrering";
+	public static final String EKSTERN_ID_LINK = "refEksternId";
 
 	private String korrespondansepartNavn;
 	private String saksbehandler;
 	private boolean serializeSaksbehandler;
 
 	private Boolean erPerson;
+	private Boolean skjermEInnsyn;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -132,6 +134,16 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 		this.erPerson = erPerson;
 	}
 
+	public Boolean getSkjermEInnsyn() {
+
+		return skjermEInnsyn;
+	}
+
+	public void setSkjermEInnsyn(Boolean skjermEInnsyn) {
+
+		this.skjermEInnsyn = skjermEInnsyn;
+	}
+
 	public Ekspederingskanal getEkspederingskanal() {
 
 		return ekspederingskanal;
@@ -163,6 +175,16 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	public LinkAction<Korrespondansepart> linkRegistrering(AbstraktRegistrering registrering) {
 
 		return link(REGISTRERING_LINK, registrering);
+	}
+
+	public LinkAction<Korrespondansepart> linkEksternId(String... eksternIdIds) {
+
+		return link(EKSTERN_ID_LINK, eksternIdIds);
+	}
+
+	public LinkAction<Korrespondansepart> linkEksternId(EksternId... eksternId) {
+
+		return link(EKSTERN_ID_LINK, eksternId);
 	}
 
 	@JsonIgnore
