@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Dokumentmedium;
+import com.documaster.rms.noark.ws.constants.EInnsynState;
 import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
@@ -69,6 +70,8 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
 	private Date offentlighetsvurdertDato;
 	private boolean serializeOffentlighetsvurdertDato;
+
+	private EInnsynState eInnsynStatus;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -329,6 +332,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		}
 
 		return null;
+	}
+
+	public EInnsynState geteInnsynStatus() {
+
+		return eInnsynStatus;
+	}
+
+	public void seteInnsynStatus(EInnsynState eInnsynStatus) {
+
+		this.eInnsynStatus = eInnsynStatus;
 	}
 
 	public Dokumentmedium getDokumentmedium() {
