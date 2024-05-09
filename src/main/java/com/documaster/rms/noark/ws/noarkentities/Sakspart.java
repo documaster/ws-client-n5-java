@@ -16,6 +16,8 @@ public class Sakspart extends PartBase<Sakspart> {
 	private String sakspartRolle;
 	private String sakspartIdent;
 	private boolean serializeSakspartIdent;
+	private Boolean erSkjermet;
+	private boolean serializeErSkjermet;
 
 	public Sakspart(String sakspartNavn, String sakspartRolle) {
 
@@ -70,6 +72,29 @@ public class Sakspart extends PartBase<Sakspart> {
 		if (serializeSakspartIdent) {
 
 			return Optional.ofNullable(sakspartIdent);
+		}
+
+		return null;
+	}
+
+	public Boolean getErSkjermet() {
+
+		return erSkjermet;
+	}
+
+	@JsonProperty("erSkjermet")
+	public void setErSkjermet(Boolean erSkjermet) {
+
+		this.erSkjermet = erSkjermet;
+		serializeErSkjermet = true;
+	}
+
+	@JsonProperty("erSkjermet")
+	public Optional<Boolean> getErSkjermetAsOptional() {
+
+		if (serializeErSkjermet) {
+
+			return Optional.ofNullable(erSkjermet);
 		}
 
 		return null;
