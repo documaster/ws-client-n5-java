@@ -25,6 +25,10 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	private boolean serializeSaksbehandler;
 
 	private Boolean erPerson;
+
+	private String eksternReferanse;
+	private boolean serializeEksternReferanse;
+
 	private Boolean skjermEInnsyn;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
@@ -132,6 +136,29 @@ public class Korrespondansepart extends PartBase<Korrespondansepart> {
 	public void setErPerson(Boolean erPerson) {
 
 		this.erPerson = erPerson;
+	}
+
+	public String getEksternReferanse() {
+
+		return eksternReferanse;
+	}
+
+	@JsonProperty("eksternReferanse")
+	public void setEksternReferanse(String eksternReferanse) {
+
+		this.eksternReferanse = eksternReferanse;
+		serializeEksternReferanse = true;
+	}
+
+	@JsonProperty("eksternReferanse")
+	public Optional<String> getEksternReferanseAsOptional() {
+
+		if (serializeEksternReferanse) {
+
+			return Optional.ofNullable(eksternReferanse);
+		}
+
+		return null;
 	}
 
 	public Boolean getSkjermEInnsyn() {
