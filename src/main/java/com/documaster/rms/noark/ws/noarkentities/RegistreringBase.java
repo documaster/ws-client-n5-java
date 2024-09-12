@@ -7,6 +7,7 @@ import com.documaster.rms.noark.ws.client.action.LinkAction;
 import com.documaster.rms.noark.ws.client.action.UnlinkAction;
 import com.documaster.rms.noark.ws.constants.Dokumentmedium;
 import com.documaster.rms.noark.ws.constants.EInnsynState;
+import com.documaster.rms.noark.ws.constants.PublishingState;
 import com.documaster.rms.noark.ws.constants.Skjerming;
 import com.documaster.rms.noark.ws.noarkentities.bsm.BsmGroupsMap;
 import com.documaster.rms.noark.ws.serialization.CustomDateFormat;
@@ -72,6 +73,8 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	private boolean serializeOffentlighetsvurdertDato;
 
 	private EInnsynState eInnsynStatus;
+
+	private PublishingState publiseringsstatus;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
 	@JsonDeserialize(using = NoarkEnumJsonDeserializer.class)
@@ -332,6 +335,16 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		}
 
 		return null;
+	}
+
+	public PublishingState getPubliseringsstatus() {
+
+		return publiseringsstatus;
+	}
+
+	public void setPubliseringsstatus(PublishingState publiseringsstatus) {
+
+		this.publiseringsstatus = publiseringsstatus;
 	}
 
 	public EInnsynState geteInnsynStatus() {
