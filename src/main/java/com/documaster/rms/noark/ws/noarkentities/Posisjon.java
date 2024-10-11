@@ -23,7 +23,7 @@ public class Posisjon extends NoarkEntityBase<Posisjon> {
 		this.koordinatsystem = koordinatsystem;
 		this.koordX = koordX;
 		this.koordY = koordY;
-		this.koordZ = koordZ;
+		setKoordZ(koordZ);
 	}
 
 	@JsonCreator
