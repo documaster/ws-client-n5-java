@@ -11,6 +11,7 @@ public class Posisjon extends NoarkEntityBase<Posisjon> {
 
 	public static final String MAPPE_LINK = "refMappe";
 	public static final String REGISTRERING_LINK = "refRegistrering";
+	public static final String EKSTERN_ID_LINK = "refEksternId";
 
 	private String koordinatsystem;
 	private String koordX;
@@ -106,6 +107,16 @@ public class Posisjon extends NoarkEntityBase<Posisjon> {
 	public LinkAction<Posisjon> linkRegistrering(AbstraktRegistrering registrering) {
 
 		return link(REGISTRERING_LINK, registrering);
+	}
+
+	public LinkAction<Posisjon> linkEksternId(String... eksternIdIds) {
+
+		return link(EKSTERN_ID_LINK, eksternIdIds);
+	}
+
+	public LinkAction<Posisjon> linkEksternId(EksternId... eksternId) {
+
+		return link(EKSTERN_ID_LINK, eksternId);
 	}
 
 	@JsonIgnore
