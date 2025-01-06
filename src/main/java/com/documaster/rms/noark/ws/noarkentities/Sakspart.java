@@ -14,6 +14,8 @@ public class Sakspart extends PartBase<Sakspart> {
 
 	private String sakspartNavn;
 	private String sakspartRolle;
+	private String sakspartRolleBeskrivelse;
+	private Boolean serializeSakspartRolleBeskrivelse;
 	private String sakspartIdent;
 	private boolean serializeSakspartIdent;
 	private Boolean erSkjermet;
@@ -52,6 +54,29 @@ public class Sakspart extends PartBase<Sakspart> {
 	public void setSakspartRolle(String sakspartRolle) {
 
 		this.sakspartRolle = sakspartRolle;
+	}
+
+	public String getSakspartRolleBeskrivelse() {
+
+		return sakspartRolleBeskrivelse;
+	}
+
+	@JsonProperty("sakspartRolleBeskrivelse")
+	public void setSakspartRolleBeskrivelse(String sakspartRolleBeskrivelse) {
+
+		this.sakspartRolleBeskrivelse = sakspartRolleBeskrivelse;
+		this.serializeSakspartRolleBeskrivelse = true;
+	}
+
+	@JsonProperty("sakspartRolleBeskrivelse")
+	public Optional<String> getSakspartRolleBeskrivelseAsOptional() {
+
+		if (serializeSakspartRolleBeskrivelse) {
+
+			return Optional.ofNullable(sakspartRolleBeskrivelse);
+		}
+
+		return null;
 	}
 
 	public String getSakspartIdent() {
