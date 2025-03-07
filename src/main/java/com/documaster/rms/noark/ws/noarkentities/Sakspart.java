@@ -15,7 +15,7 @@ public class Sakspart extends PartBase<Sakspart> {
 	private String sakspartNavn;
 	private String sakspartRolle;
 	private String sakspartRolleBeskrivelse;
-	private Boolean serializeSakspartRolleBeskrivelse;
+	private boolean serializeSakspartRolleBeskrivelse;
 	private String sakspartIdent;
 	private boolean serializeSakspartIdent;
 	private Boolean erSkjermet;
