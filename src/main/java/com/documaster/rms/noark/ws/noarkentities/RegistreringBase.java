@@ -54,6 +54,8 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	private boolean serializeJournalansvarlig;
 	private String journalansvarligBrukerIdent;
 	private boolean serializeJournalansvarligBrukerIdent;
+	private Boolean publisereSkjermedeOffentligeDokumenter;
+	private boolean serializePublisereSkjermedeOffentligeDokumenter;
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
@@ -233,6 +235,29 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		if (serializeJournalansvarligBrukerIdent) {
 
 			return Optional.ofNullable(journalansvarligBrukerIdent);
+		}
+
+		return null;
+	}
+
+	public Boolean getPublisereSkjermedeOffentligeDokumenter() {
+
+		return publisereSkjermedeOffentligeDokumenter;
+	}
+
+	@JsonProperty("publisereSkjermedeOffentligeDokumenter")
+	public void setPublisereSkjermedeOffentligeDokumenter(Boolean publisereSkjermedeOffentligeDokumenter) {
+
+		this.publisereSkjermedeOffentligeDokumenter = publisereSkjermedeOffentligeDokumenter;
+		serializePublisereSkjermedeOffentligeDokumenter = true;
+	}
+
+	@JsonProperty("publisereSkjermedeOffentligeDokumenter")
+	public Optional<Boolean> getPublisereSkjermedeOffentligeDokumenterAsOptional() {
+
+		if (serializePublisereSkjermedeOffentligeDokumenter) {
+
+			return Optional.ofNullable(publisereSkjermedeOffentligeDokumenter);
 		}
 
 		return null;
