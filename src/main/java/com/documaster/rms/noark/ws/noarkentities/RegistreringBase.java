@@ -50,6 +50,12 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 	private boolean serializeBeskrivelse;
 	private String forfatter;
 	private boolean serializeForfatter;
+	private String journalansvarlig;
+	private boolean serializeJournalansvarlig;
+	private String journalansvarligBrukerIdent;
+	private boolean serializeJournalansvarligBrukerIdent;
+	private Boolean publisereSkjermedeOffentligeDokumenter;
+	private boolean serializePublisereSkjermedeOffentligeDokumenter;
 	private BsmGroupsMap virksomhetsspesifikkeMetadata = new BsmGroupsMap();
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateFormat.DATE)
@@ -183,6 +189,75 @@ public abstract class RegistreringBase<TEntity extends RegistreringBase<TEntity>
 		if (serializeForfatter) {
 
 			return Optional.ofNullable(forfatter);
+		}
+
+		return null;
+	}
+
+	public String getJournalansvarlig() {
+
+		return journalansvarlig;
+	}
+
+	@JsonProperty("journalansvarlig")
+	public void setJournalansvarlig(String journalansvarlig) {
+
+		this.journalansvarlig = journalansvarlig;
+		serializeJournalansvarlig = true;
+	}
+
+	@JsonProperty("journalansvarlig")
+	public Optional<String> getJournalansvarligAsOptional() {
+
+		if (serializeJournalansvarlig) {
+
+			return Optional.ofNullable(journalansvarlig);
+		}
+
+		return null;
+	}
+
+	public String getJournalansvarligBrukerIdent() {
+
+		return journalansvarligBrukerIdent;
+	}
+
+	@JsonProperty("journalansvarligBrukerIdent")
+	public void setJournalansvarligBrukerIdent(String journalansvarligBrukerIdent) {
+
+		this.journalansvarligBrukerIdent = journalansvarligBrukerIdent;
+		serializeJournalansvarligBrukerIdent = true;
+	}
+
+	@JsonProperty("journalansvarligBrukerIdent")
+	public Optional<String> getJournalansvarligBrukerIdentAsOptional() {
+
+		if (serializeJournalansvarligBrukerIdent) {
+
+			return Optional.ofNullable(journalansvarligBrukerIdent);
+		}
+
+		return null;
+	}
+
+	public Boolean getPublisereSkjermedeOffentligeDokumenter() {
+
+		return publisereSkjermedeOffentligeDokumenter;
+	}
+
+	@JsonProperty("publisereSkjermedeOffentligeDokumenter")
+	public void setPublisereSkjermedeOffentligeDokumenter(Boolean publisereSkjermedeOffentligeDokumenter) {
+
+		this.publisereSkjermedeOffentligeDokumenter = publisereSkjermedeOffentligeDokumenter;
+		serializePublisereSkjermedeOffentligeDokumenter = true;
+	}
+
+	@JsonProperty("publisereSkjermedeOffentligeDokumenter")
+	public Optional<Boolean> getPublisereSkjermedeOffentligeDokumenterAsOptional() {
+
+		if (serializePublisereSkjermedeOffentligeDokumenter) {
+
+			return Optional.ofNullable(publisereSkjermedeOffentligeDokumenter);
 		}
 
 		return null;

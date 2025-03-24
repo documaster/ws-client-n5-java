@@ -23,8 +23,6 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	private Integer journalaar;
 	private Integer journalsekvensnummer;
 	private Integer journalpostnummer;
-	private String journalansvarlig;
-	private String journalansvarligBrukerIdent;
 	private Boolean skjermKorrespondanseParterEInnsyn;
 
 	@JsonSerialize(using = NoarkEnumJsonSerializer.class)
@@ -81,26 +79,6 @@ public class Journalpost extends RegistreringBase<Journalpost> {
 	public void setJournalpostnummer(Integer journalpostnummer) {
 
 		this.journalpostnummer = journalpostnummer;
-	}
-
-	public String getJournalansvarlig() {
-
-		return journalansvarlig;
-	}
-
-	public void setJournalansvarlig(String journalansvarlig) {
-
-		this.journalansvarlig = journalansvarlig;
-	}
-
-	public String getJournalansvarligBrukerIdent() {
-
-		return journalansvarligBrukerIdent;
-	}
-
-	public void setJournalansvarligBrukerIdent(String journalansvarligBrukerIdent) {
-
-		this.journalansvarligBrukerIdent = journalansvarligBrukerIdent;
 	}
 
 	public Journalposttype getJournalposttype() {

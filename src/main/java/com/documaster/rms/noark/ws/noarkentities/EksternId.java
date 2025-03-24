@@ -13,6 +13,7 @@ public class EksternId extends NoarkEntityBase<EksternId> {
 	public static final String KORRESPONDANSEPART_LINK = "refKorrespondansepart";
 	public static final String DOKUMENT_LINK = "refDokument";
 	public static final String MERKNAD_LINK = "refMerknad";
+	public static final String POSISJON_LINK = "refPosisjon";
 
 	private String eksterntSystem;
 	private String eksternID;
@@ -110,6 +111,16 @@ public class EksternId extends NoarkEntityBase<EksternId> {
 	public LinkAction<EksternId> linkMerknad(Merknad merknad) {
 
 		return link(MERKNAD_LINK, merknad);
+	}
+
+	public LinkAction<EksternId> linkPosisjon(String posisjonId) {
+
+		return link(POSISJON_LINK, posisjonId);
+	}
+
+	public LinkAction<EksternId> linkPosisjon(Posisjon posisjon) {
+
+		return link(POSISJON_LINK, posisjon);
 	}
 
 	@JsonIgnore
