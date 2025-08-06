@@ -136,8 +136,32 @@ public class EksternId extends NoarkEntityBase<EksternId> {
 	}
 
 	@JsonIgnore
+	public String getRefSakspart() {
+
+		return getRef(SAKSPART_LINK);
+	}
+
+	@JsonIgnore
+	public String getRefKorrespondansepart() {
+
+		return getRef(KORRESPONDANSEPART_LINK);
+	}
+
+	@JsonIgnore
 	public String getRefDokument() {
 
 		return getRef(DOKUMENT_LINK);
+	}
+
+	@JsonIgnore
+	public String getRefMerknad() {
+
+		return getRef(MERKNAD_LINK);
+	}
+
+	@JsonIgnore
+	public String getRefPosisjon() {
+
+		return getRef(POSISJON_LINK);
 	}
 }

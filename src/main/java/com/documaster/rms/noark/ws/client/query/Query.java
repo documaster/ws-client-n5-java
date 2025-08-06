@@ -2,6 +2,7 @@ package com.documaster.rms.noark.ws.client.query;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import com.documaster.rms.noark.ws.Argument;
 import com.documaster.rms.noark.ws.client.HttpMethod;
@@ -62,15 +63,33 @@ public class Query<TEntity extends NoarkEntity> extends HttpService<RmsClient> {
 		return this;
 	}
 
+	public Query<TEntity> addStringListQueryParam(String paramName, List<String> paramValue) {
+
+		this.query.getParameters().add(QueryParam.createQueryParamWithStringValues(paramName, paramValue));
+		return this;
+	}
+
 	public Query<TEntity> addQueryParam(String paramName, int paramValue) {
 
 		this.query.getParameters().add(new QueryParam(paramName, paramValue));
 		return this;
 	}
 
+	public Query<TEntity> addIntegerListQueryParam(String paramName, List<Integer> paramValue) {
+
+		this.query.getParameters().add(QueryParam.createQueryParamWithIntegerValues(paramName, paramValue));
+		return this;
+	}
+
 	public Query<TEntity> addQueryParam(String paramName, long paramValue) {
 
 		this.query.getParameters().add(new QueryParam(paramName, paramValue));
+		return this;
+	}
+
+	public Query<TEntity> addLongListQueryParam(String paramName, List<Long> paramValue) {
+
+		this.query.getParameters().add(QueryParam.createQueryParamWithLongValues(paramName, paramValue));
 		return this;
 	}
 
