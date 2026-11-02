@@ -38,12 +38,12 @@
 		<version.httpcomponents.fluent.hc>4.5.13</version.httpcomponents.fluent.hc>
 		<version.httpcomponents.httpclient>4.5.13</version.httpcomponents.httpclient>
 		<version.httpcomponents.httpcore>4.4.13</version.httpcomponents.httpcore>
-		<version.commons.io>2.7</version.commons.io>
-		<version.commons.codec>1.11</version.commons.codec>
-		<version.jackson.databind>2.12.7.1</version.jackson.databind>
-		<version.jackson.annotations>2.12.7</version.jackson.annotations>
-		<version.jackson.core>2.12.7</version.jackson.core>
-		<version.jackson.datatype>2.12.7</version.jackson.datatype>
+		<version.commons.io>2.22.0</version.commons.io>
+		<version.commons.codec>1.22.1</version.commons.codec>
+		<version.jackson.databind>2.21.8</version.jackson.databind>
+		<version.jackson.annotations>2.21</version.jackson.annotations>
+		<version.jackson.core>2.21.8</version.jackson.core>
+		<version.jackson.datatype>2.21.8</version.jackson.datatype>
 		<version.source.plugin>3.1.0</version.source.plugin>
 		<version.javadoc.plugin>3.1.0</version.javadoc.plugin>
 	</properties>
